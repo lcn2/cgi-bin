@@ -58,6 +58,42 @@ if [ X"$argv0" = X"cgibin" ]; then
 
     <HR>
 
+    The following are some cgi-bin scripts that you can view:
+
+    <P></P>
+
+    <UL>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cat">
+    hitcount.cat</A> (maintain and display page usage count)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat">
+    html.cgi.cat</A> (an example of an CGI returning HTML)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi.cat">
+    showcount.cgi.cat</A> (demo of usage count lookup and modify)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
+    test.cgi.cat</A> (test server for CGI/1.1 conformance)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cat">
+    versions-b.cat</A> (display versions -b output)<BR>
+    </UL>
+
+    and here is where you can run them:
+
+    <P></P>
+
+    <UL>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount?hitcount+o">
+    hitcount</A> (maintain and display page usage count)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi">
+    html.cgi</A> (an example of an CGI returning HTML)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi">
+    showcount.cgi</A> (demo of usage count lookup and modify)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi">
+    test.cgi</A> (test server for CGI/1.1 conformance)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b">
+    versions-b</A> (display versions -b output)<BR>
+    </UL>
+
+    <HR>
+
     This html document that you are <I>now</I>
     viewing was produced by <B>cgibin</B>.  
     The source to <B>cgibin</B> is as follows:

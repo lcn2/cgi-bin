@@ -72,7 +72,7 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
 			'link' => '#FF0000',
 			'vlink' => '#FFF000',
 			'text' => '#FFFFFF'),
-	$q->h2('Access Denyed'),
+	$q->h2('Access Denied'),
 	"\nSorry, you may only access the\n",
 	$q->a({'href' => $q->self_url}, 'forced referer demo'),
 	"\nvia the URLs that contain the string:\n",

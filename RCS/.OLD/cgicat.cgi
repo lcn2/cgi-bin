@@ -4,11 +4,11 @@
 # cgicat - cat a cgi-bin script in html form
 #
 # usage:
-#	xxx.txt
+#	cgi_filename.cat
 #
-#	Cat the file xxx so that the reader does not interpret the
-#	usual html magic characters.  The basename (minus the .txt)
-#	is the file to cat.
+#	Cat the file cgi_filename so that the reader does not interpret
+#	the usual html magic characters.  The basename (minus the .cat)
+#	is the file to print.
 
 # setup
 #
@@ -21,8 +21,8 @@ $| = 1;
 my $argv0;
 my $line;
 
-# obtain the basename of the arg without any .txt
-# for backward compat, we also strip off .cat
+# obtain the basename of the arg without any .cat
+# for backward compat, we also strip off .txt
 #
 $argv0 = $0;
 $argv0 =~ s/^.*\///o;
@@ -40,11 +40,11 @@ open(CGIFILE, "<$argv0") || die "cannot open $argv0\n";
 
 # special code to explain how to use cgicat
 #
-# This section is only invoked if we are executed as cgicat.txt
+# This section is only invoked if we are executed as cgicat.cat
 #
 if ($argv0 =~ /cgicat/) {
 
-    # we are being executed as cgicat.txt, display info about cgicat.txt
+    # we are being executed as cgicat.cat, display info about cgicat.cat
     #
     print <<HTML_INFO1;
 content-type: text/html
@@ -65,11 +65,11 @@ a selected cgi-bin script.
 <P></P>
 
 Say you want to be able to view the file <B>whoami.cgi</B>.<BR>
-If the cgi-bin file <B>whoami.cgi.txt</B> is a link to <B>cgicat.cgi</B>
+If the cgi-bin file <B>whoami.cgi.cat</B> is a link to <B>cgicat.cgi</B>
 then invocation of the URL:
 
 <BLOCKQUOTE>
-<A HREF="/cgi-bin/whoami.cgi.txt">/cgi-bin/whoami.cgi.txt</A>
+<A HREF="/cgi-bin/whoami.cgi.cat">/cgi-bin/whoami.cgi.cat</A>
 </BLOCKQUOTE>
 
 will display the contents of:
@@ -85,17 +85,17 @@ The following are some cgi-bin scripts that you can view:
 <P></P>
 
 <UL>
-<LI><A HREF="/cgi-bin/html.cgi.txt">html.cgi</A> 
+<LI><A HREF="/cgi-bin/html.cgi.cat">html.cgi</A> 
 (an example of an CGI returning HTML)<BR>
-<LI><A HREF="/cgi-bin/whoami.cgi.txt">whoami.cgi</A> 
+<LI><A HREF="/cgi-bin/whoami.cgi.cat">whoami.cgi</A> 
 (determine what a Browser tells a server)<BR>
-<LI><A HREF="/cgi-bin/versions-b.cgi.txt">versions-b.cgi</A> 
+<LI><A HREF="/cgi-bin/versions-b.cgi.cat">versions-b.cgi</A> 
 (display versions -b output)<BR>
-<LI><A HREF="/cgi-bin/showprods-3EFn.cgi.txt">showprods-3EFn.cgi</A> 
+<LI><A HREF="/cgi-bin/showprods-3EFn.cgi.cat">showprods-3EFn.cgi</A> 
 (display showprods -3EFn output)<BR>
-<LI><A HREF="/cgi-bin/MachineInfo.cgi.txt">MachineInfo.cgi</A> 
+<LI><A HREF="/cgi-bin/MachineInfo.cgi.cat">MachineInfo.cgi</A> 
 (display hinv output in table form)<BR>
-<LI><A HREF="/cgi-bin/sample.cgi.txt">sample.cgi</A> 
+<LI><A HREF="/cgi-bin/sample.cgi.cat">sample.cgi</A> 
 (allows access to chongo's sample directory)
 </UL>
 

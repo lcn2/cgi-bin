@@ -32,7 +32,7 @@ print <<END_OF_FILE;
 
 This html document was produced by html.cgi. <P>
 
-View the <A HREF="/chongo/tech/comp/cgi/html.cgi.txt">html.cgi</A> source.
+View the <A HREF="/chongo/tech/comp/cgi/html_cgi.txt">html.cgi</A> source.
 <P>
 
 Return to the <A HREF="/chongo/tech/comp/cgi/cgidemo.html">CGI</A> 

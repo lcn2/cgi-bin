@@ -48,8 +48,8 @@ if [ X"$argv0" = X"cgicat" ]; then
 
     <P></P>
 
-    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
-    http://prime.corp.sgi.com/cgi-bin/test.cgi.cat</A>
+    <DD><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi.cat">
+    http://prime.csd.sgi.com/cgi-bin/test.cgi.cat</A>
 
     <P></P>
 
@@ -62,13 +62,13 @@ if [ X"$argv0" = X"cgicat" ]; then
     <P></P>
 
     <UL>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cgi.cat">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/hitcount.cgi.cat">
     hitcount.cgi</A> (maintain and display page usage count)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi.cat">
     html.cgi</A> (an example of an CGI returning HTML)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi.cat">
     test.cgi</A> (test server for CGI/1.1 conformance)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cgi.cat">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/versions-b.cgi.cat">
     versions-b.cgi</A> (display versions -b output)<BR>
     </UL>
 
@@ -77,13 +77,13 @@ if [ X"$argv0" = X"cgicat" ]; then
     <P></P>
 
     <UL>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cgi?hitcount+o">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/hitcount.cgi?hitcount+o">
     hitcount.cgi</A> (maintain and display page usage count)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi">
     html.cgi</A> (an example of an CGI returning HTML)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi">
     test.cgi</A> (test server for CGI/1.1 conformance)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cgi">
+    <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/versions-b.cgi">
     versions-b.cgi</A> (display versions -b output)<BR>
     </UL>
 
@@ -113,9 +113,9 @@ HTML_INFO1
 
     <ADDRESS>
     Landon Curt Noll 
-    (<A HREF="//prime.corp.sgi.com/chongo.html">chongo@corp.sgi.com</a>)<br>
-    <A HREF="//prime.corp.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-    <A HREF="//prime.corp.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+    (<A HREF="//prime.csd.sgi.com/chongo.html">chongo@sgi.com</a>)<br>
+    <A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
+    <A HREF="//prime.csd.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
     </ADDRESS>
     </BODY>
     </HTML>
@@ -137,8 +137,8 @@ content-type: text/html
 </HEAD>
 
 <BODY BGCOLOR="#80A0C0">
-<H1> <A HREF="http://prime.corp.sgi.com/cgi-bin/$argv0">
-http://prime.corp.sgi.com/cgi-bin/$argv0</A>
+<H1> <A HREF="http://prime.csd.sgi.com/cgi-bin/$argv0">
+http://prime.csd.sgi.com/cgi-bin/$argv0</A>
 source listing
 </H1>
 
@@ -162,9 +162,9 @@ HTML_INFO3
 
 <ADDRESS>
 Landon Curt Noll 
-(<A HREF="//prime.corp.sgi.com/chongo.html">chongo@corp.sgi.com</a>)<br>
-<A HREF="//prime.corp.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.corp.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+(<A HREF="//prime.csd.sgi.com/chongo.html">chongo@sgi.com</a>)<br>
+<A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
+<A HREF="//prime.csd.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
 </ADDRESS>
 </BODY>
 </HTML>

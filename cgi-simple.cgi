@@ -5,30 +5,6 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.13 $
-# @(#) $Id: cgi-example.cgi,v 1.13 2002/03/14 20:09:54 chongo Exp $
-# @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cgi-example.cgi,v $
-#
-# Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
-#
-# Permission to use, copy, modify, and distribute this software and
-# its documentation for any purpose and without fee is hereby granted,
-# provided that the above copyright, this permission notice and text
-# this comment, and the disclaimer below appear in all of the following:
-#
-#       supporting documentation
-#       source copies
-#       source works derived from this source
-#       binaries derived from this source or from derived source
-#
-# LANDON CURT NOLL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
-# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO
-# EVENT SHALL LANDON CURT NOLL BE LIABLE FOR ANY SPECIAL, INDIRECT OR
-# CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
-# USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-# PERFORMANCE OF THIS SOFTWARE.
-#
 # chongo (Landon Curt Noll, http://www.isthe.com/chongo/index.html) /\oo/\
 #
 # Share and enjoy! :-)
@@ -74,7 +50,7 @@ print $q->hr, "\n";
 # our standard trailer
 #
 print "You can view the ";
-print $q->a({-href => "/chongo/tech/comp/cgi/cgi-simple.txt"},
+print $q->a({-href => "/chongo/tech/comp/cgi/cgi-simple_cgi.txt"},
 	    'source code'), "\n";
 print " to this program.\n";
 print $q->hr, "\n";

@@ -32,20 +32,21 @@ print <<END_OF_FILE;
 
 This html document was produced by html.cgi. <P>
 
-View the <A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi.cat">html.cgi</A> source.
+View the <A HREF="html.cgi.txt">html.cgi</A> source.
 <P>
 
-Return to the <A HREF="//prime.csd.sgi.com/html/cgi.html#example">CGI</A> 
+Return to the <A HREF="cgi.html#example">CGI</A> 
 example.
 
 <HR>
 
-<ADDRESS>
-Landon Curt Noll 
-(<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
-<A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.csd.sgi.com/html/bat.html"><strong>/\\oo/\\</strong></a>
-</ADDRESS>
+<H3>Author:</H3>
+<BLOCKQUOTE>
+<A HREF="/chongo/index.html">chongo</A>
+&lt; Landon Curt Noll &gt;
+<STRONG>/\\oo/\\</STRONG>
+</BLOCKQUOTE>
+
 </BODY>
 </HTML>
 END_OF_FILE

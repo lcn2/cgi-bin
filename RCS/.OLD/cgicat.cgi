@@ -1,7 +1,7 @@
 #!/bin/sh
-# @(#)html	1.1 10 Oct 1995 03:23:08
+# @(#)cgibin	1.1 10 Oct 1995 03:23:08
 #
-# html - cat a file containing html in raw form
+# cgibin - cat a cgi-bin script in html form
 #
 # usage:
 #	xxx.cat
@@ -16,34 +16,34 @@ argv0="`/sbin/basename $0 .cat`"
 export argv0
 
 
-# special code to explain how to use html.cat
+# special code to explain how to use cgibin
 #
-# This section is only invoked if we are executoed as html.cat.cat
+# This section is only invoked if we are executoed as cgibin.cat
 #
-if [ X"$argv0" = X"html" ]; then
+if [ X"$argv0" = X"cgibin" ]; then
 
-    # we are being executed as html.cat, display info about html.cat
+    # we are being executed as cgibin.cat, display info about cgibin.cat
     #
     /sbin/cat <<HTML_INFO1 | sed -e 's/^    //'
     content-type: text/html
 
     <HTML>
     <HEAD>
-    <TITLE> How to use html.cat </TITLE>
+    <TITLE> How to use cgibin </TITLE>
     </HEAD>
 
     <BODY>
-    <H1> How to use html.cat </H1>
+    <H1> How to use cgibin </H1>
 
     <HR>
 
-    The <B>html.cat</B> cgi script allows one to view the source of
+    The <B>cgibin.cat</B> cgi script allows one to view the source of
     a selected cgi-bin script.
 
     <P></P>
 
     Say you want to be able to view the file <B>test.cgi</B>.  If the
-    cgi-bin file <B>test.cgi.bin</B> is a link to <B>html.cat</B>
+    cgi-bin file <B>test.cgi.bin</B> is a link to <B>cgibin.cat</B>
     then execution of the URL:
 
     <P></P>
@@ -58,8 +58,9 @@ if [ X"$argv0" = X"html" ]; then
 
     <HR>
 
-    This html document was produced by <B>html</B>.  The source to
-    <B>html</B> is as follows:
+    This html document that you are <I>now</I>
+    viewing was produced by <B>cgibin</B>.  
+    The source to <B>cgibin</B> is as follows:
 
     <P></P>
 
@@ -67,7 +68,7 @@ if [ X"$argv0" = X"html" ]; then
     <PRE>
 HTML_INFO1
 
-    # display the source to html.cat
+    # display the source to cgibin
     #
     /sbin/sed -f html.sed "$argv0"
 
@@ -101,12 +102,12 @@ content-type: text/html
 
 <HTML>
 <HEAD>
-<TITLE> How to use html.cat </TITLE>
+<TITLE> $argv0 source listing </TITLE>
 </HEAD>
 
 <H1> <A HREF="http://prime.corp.sgi.com/cgi-bin/$argv0">
 http://prime.corp.sgi.com/cgi-bin/$argv0</A>
-source
+source listing
 </H1>
 
 <HR>

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -wT
 #
-# forced_referer.cgi - Example of forcing a referring URL to contain a string
+# forced_referrer.cgi - Example of forcing a referring URL to contain a string
 #
 # Copyright (c) 1999 by Landon Curt Noll.  All Rights Reserved.
 #
@@ -53,11 +53,11 @@ my $myself;     # this URL
 
 # URL info
 #
-# The HTTP_REFERER must contain with $referer_url or we will
+# The HTTP_REFERER must contain with $referrer_url or we will
 # ask them to visit $bounce_url first.
 #
-my $referer_url = "/chongo/tech/comp/cgi/referer/";
-my $bounce_url = "/chongo/tech/comp/cgi/referer/index.html";
+my $referrer_url = "/chongo/tech/comp/cgi/referrer/";
+my $bounce_url = "/chongo/tech/comp/cgi/referrer/index.html";
 my $timeout = 6;
 
 # setup
@@ -79,7 +79,7 @@ $myself =~ s/.*\///;
 if (!defined($ENV{'HTTP_REFERER'})) {
     $ENV{'HTTP_REFERER'} = ' << NO HTTP_REFERER FOUND >> ';
 }
-if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
+if ($ENV{'HTTP_REFERER'} !~ /\Q$referrer_url\E/) {
     print $q->header('Refresh' => "$timeout; url=$bounce_url"),
 	$q->start_html( 'title' => 'Forced Referer demo',
 			'bgcolor' => '000000',
@@ -88,9 +88,9 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
 			'text' => '#FFFFFF'),
 	$q->h2('Access Denied'),
 	"\nSorry, you may only access the\n",
-	$q->b("forced referer CGI"),
+	$q->b("forced referrer CGI"),
 	"\nvia the URLs that contain the string:\n",
-	$q->blockquote($q->b($referer_url)),
+	$q->blockquote($q->b($referrer_url)),
 	"\nYour previous URL:\n",
 	$q->blockquote($q->b($q->a({'href' => $ENV{'HTTP_REFERER'}},
 				   $ENV{'HTTP_REFERER'}))),
@@ -98,11 +98,11 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
 	$q->p,
 	"\nIf your browser supports it, in $timeout seconds, you will\n",
 	"be moved to the ",
-	$q->b($q->a({'href' => $bounce_url}, 'forced referer demo')),
+	$q->b($q->a({'href' => $bounce_url}, 'forced referrer demo')),
 	"\npage or you may click on that link to go there now.\n",
 	$q->p,
 	"\nFYI: The\n",
-	$q->a({'href' => "${referer_url}${myself}.txt"}, 'source'),
+	$q->a({'href' => "${referrer_url}${myself}.txt"}, 'source'),
 	"\nfor this CGI is available.\n",
 	$q->p,
 	$q->end_html;
@@ -122,13 +122,13 @@ print $q->header,
     $q->blockquote($q->a({'href' => $ENV{'HTTP_REFERER'}},
 		         $ENV{'HTTP_REFERER'})),
     "\ncontained the string:\n",
-    $q->blockquote($q->b($referer_url)),
+    $q->blockquote($q->b($referrer_url)),
     "\nand so you were allowed to access the\n",
-    $q->b("forced referer CGI"),
+    $q->b("forced referrer CGI"),
     ".\n",
     $q->p,
     "\nFYI: The\n",
-    $q->a({'href' => "${referer_url}${myself}.txt"}, 'source'),
+    $q->a({'href' => "${referrer_url}${myself}.txt"}, 'source'),
     "\nfor this CGI is available.\n",
     $q->p,
     $q->end_html;

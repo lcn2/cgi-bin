@@ -14,7 +14,7 @@
 #
 use strict;
 require 5.003;
-select(STDOUT);
+#select(STDOUT);
 $| = 1;
 
 # my vars
@@ -122,7 +122,7 @@ HTML_INFO1
 
     # display the source to cgicat
     #
-    while ($line = <CGIFILE>) {
+    while (defined($line = <CGIFILE>)) {
 	$line =~ s/&/&amp;/og;
 	$line =~ s/</&lt;/og;
 	$line =~ s/>/&gt;/og;
@@ -177,7 +177,7 @@ HTML_INFO3
 
 # display the source to cgicat
 #
-while ($line = <CGIFILE>) {
+while (defined($line = <CGIFILE>)) {
     $line =~ s/&/&amp;/og;
     $line =~ s/</&lt;/og;
     $line =~ s/>/&gt;/og;

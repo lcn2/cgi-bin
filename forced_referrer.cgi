@@ -50,8 +50,8 @@ my $myself;     # this URL
 # The HTTP_REFERER must contain with $referer_url or we will
 # ask them to visit $bounce_url first.
 #
-my $referer_url = "/chongo/misc/comp/referer/";
-my $bounce_url = "/chongo/misc/comp/referer/index.html";
+my $referer_url = "/chongo/tech/comp/cgi/referer/";
+my $bounce_url = "/chongo/tech/comp/cgi/referer/index.html";
 my $timeout = 6;
 
 # setup

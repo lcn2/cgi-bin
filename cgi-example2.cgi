@@ -49,7 +49,9 @@ print $q->header;
 #    'submit'	- receive values and ack the submission
 #
 my $action = 'default';
-if (defined($q->param('do_preview'))) {
+if (defined($q->param('do_default'))) {
+    $action = 'default';
+} elsif (defined($q->param('do_preview'))) {
     $action = 'preview';
 } elsif (defined($q->param('do_edit'))) {
     $action = 'edit';
@@ -94,9 +96,13 @@ if ($action eq 'default' || $action eq 'edit') {
 		     'defaults' => $pardef{'color'}),
       $q->p,
       $q->hidden('name' => 'do_preview',
-		 'value' => 'preview'),
-      $q->reset('name' => 'Clear'),
+		 'value' => 'cgi-example2.cgi'),
       $q->submit('name' => 'Preview'),
+      $q->end_form,
+      $q->start_form,
+      $q->submit('name' => 'Reset'),
+      $q->hidden('name' => 'do_default',
+		 'value' => 'cgi-example2.cgi'),
       $q->end_form,
       $q->hr;
 
@@ -126,7 +132,7 @@ if ($action eq 'default' || $action eq 'edit') {
     print
       $q->start_form,
       $q->hidden('name' => 'do_edit',
-		 'value' => 'edit');
+		 'value' => 'cgi-example2.cgi');
     foreach $name ( @parname ) {
 	my $value = $q->param($name);
 	if (defined $value) {
@@ -142,7 +148,7 @@ if ($action eq 'default' || $action eq 'edit') {
     print
       $q->start_form,
       $q->hidden('name' => 'do_submit',
-		 'value' => 'submit');
+		 'value' => 'cgi-example2.cgi');
     foreach $name ( @parname ) {
 	my $value = $q->param($name);
 	if (defined $value) {

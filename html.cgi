@@ -32,10 +32,10 @@ print <<END_OF_FILE;
 
 This html document was produced by html.cgi. <P>
 
-View the <A HREF="/chongo/misc/comp/html.cgi.txt">html.cgi</A> source.
+View the <A HREF="/chongo/tech/comp/cgi/html.cgi.txt">html.cgi</A> source.
 <P>
 
-Return to the <A HREF="/chongo/misc/comp/cgidemo.html">CGI</A> 
+Return to the <A HREF="/chongo/tech/comp/cgi/cgidemo.html">CGI</A> 
 sutff page.
 
 <HR>

@@ -5,8 +5,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.1 $
-# @(#) $Id: cookie.cgi,v 1.1 2002/09/29 00:07:22 chongo Exp chongo $
+# @(#) $Revision: 1.2 $
+# @(#) $Id: cookie.cgi,v 1.2 2003/02/04 15:30:35 chongo Exp chongo $
 # @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cookie.cgi,v $
 #
 # Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
@@ -186,6 +186,10 @@ print "You can view the ";
 print $q->a({-href => "/chongo/tech/comp/cgi/".$mybaseself.".txt"},
 	    'source code'), "\n";
 print " to this program.\n";
+print $q->p, "\n";
+print "Other ",
+      $q->a({-href => "/chongo/tech/comp/cgi/cgidemo.html"},
+            "cgi demos"), ".\n";
 print $q->hr, "\n";
 print $q->end_html, "\n";
 

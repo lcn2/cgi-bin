@@ -1,6 +1,6 @@
 #!/usr/bin/perl -wT
 #
-# forcedrefer.cgi - Example of forcing a referring URL to contain a string
+# forced_referer.cgi - Example of forcing a referring URL to contain a string
 #
 # Copyright (c) 1999 by Landon Curt Noll.  All Rights Reserved.
 #
@@ -45,12 +45,12 @@ use strict;
 my $q;          # our CGI object
 my $myself;     # this URL
 
-# forced previous site
+# URL info
 #
-# The HTTP_REFERER must contain with $refer_url or we will
+# The HTTP_REFERER must contain with $referer_url or we will
 # ask them to visit $bounce_url first.
 #
-my $refer_url = "/chongo/misc/comp/refer/";
+my $referer_url = "/chongo/misc/comp/refer/";
 my $bounce_url = "/chongo/misc/comp/refer/index.html";
 my $timeout = 6;
 
@@ -65,28 +65,28 @@ $q->use_named_parameters(1);
 if (!defined($ENV{'HTTP_REFERER'})) {
     $ENV{'HTTP_REFERER'} = ' << NO HTTP_REFERER FOUND >> ';
 }
-if ($ENV{'HTTP_REFERER'} !~ /\Q$refer_url\E/) {
+if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
     print $q->header('Refresh' => "$timeout; url=$bounce_url"),
-	$q->start_html( 'title' => 'Forced Refer example',
+	$q->start_html( 'title' => 'Forced Referer demo',
 			'bgcolor' => '000000',
 			'link' => '#FF0000',
 			'vlink' => '#FFF000',
 			'text' => '#FFFFFF'),
 	$q->h2('Access Denyed'),
 	"\nSorry, you may only access the\n",
-	$q->a({'href' => $q->self_url}, 'forcedrefer example'),
+	$q->a({'href' => $q->self_url}, 'forced referer demo'),
 	"\nvia the URLs that contain the string:\n",
-	$q->blockquote($q->b($refer_url)),
-	"\nsuch as CGI example page:\n",
+	$q->blockquote($q->b($referer_url)),
+	"\nsuch as CGI demo page:\n",
 	$q->blockquote($q->b($q->a({'href' => $bounce_url},
-				   'forcedrefer example'))),
+				   'forced referer demo'))),
 	"\nYour previous URL:\n",
 	$q->blockquote($q->b($q->a({'href' => $ENV{'HTTP_REFERER'}},
 				   $ENV{'HTTP_REFERER'}))),
 	"\ndid not contain that string.\n",
 	$q->p,
 	"\nIn $timeout seconds, you will be moved to the ",
-	$q->b($q->a({'href' => $bounce_url}, 'forcedrefer example')),
+	$q->b($q->a({'href' => $bounce_url}, 'forced referer demo')),
 	"\npage or you may click on that link to go there now.\n",
 	$q->p,
 	"\nFYI: The\n",
@@ -100,7 +100,7 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$refer_url\E/) {
 # The HTTP_REFERER is good, so tell them they are successful.
 #
 print $q->header,
-    $q->start_html('title' => 'Forced Refer example',
+    $q->start_html('title' => 'Forced Referer demo',
 		   'bgcolor' => '000000',
 		   'link' => '#FF0000',
 		   'vlink' => '#FFF000',
@@ -110,7 +110,7 @@ print $q->header,
     $q->blockquote($q->a({'href' => $ENV{'HTTP_REFERER'}},
 		         $ENV{'HTTP_REFERER'})),
     "\ncontained the string:\n",
-    $q->blockquote($q->b($refer_url)),
+    $q->blockquote($q->b($referer_url)),
     "\nand so you were allowed access to\n",
     $q->a({'href' => $q->self_url}, 'this URL'),
     ".\n",

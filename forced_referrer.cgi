@@ -83,19 +83,23 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referrer_url\E/) {
     print "\nSorry, you may only access the\n";
     print $q->b("forced referrer CGI");
     print "\nvia the URLs that contain the string:\n";
+    print $q->br;
+    print $q->br;
     print $q->blockquote($q->b($referrer_url));
+    print $q->p;
     print "\nYour previous URL:\n";
     print $q->blockquote($q->b($q->a({'href' => $ENV{'HTTP_REFERER'}},
 			 $ENV{'HTTP_REFERER'})));
+    print $q->p;
     print "\ndid not contain that string.\n";
     print $q->p;
     print "\nIf your browser supports it, in $timeout seconds, you will\n";
     print "be moved to the ";
-    print $q->b($q->a({'href' => $bounce_url}, 'forced referrer demo'));
+    print $q->b($q->a({-href => $bounce_url}, 'forced referrer demo'));
     print "\npage or you may click on that link to go there now.\n";
     print $q->p;
     print "\nFYI: The\n";
-    print $q->a({'href' => "${mysrc}"}, 'source');
+    print $q->a({-href => "${mysrc}"}, 'source');
     print "\nfor this CGI is available.\n";
     print $q->p;
     print $q->end_html;
@@ -106,23 +110,27 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referrer_url\E/) {
 #
 print $q->header;
 print $q->start_html(-title => 'Forced Referer demo',
-		     -bgcolor => '000000',
-		     -link => '#FF0000',
-		     -vlink => '#FFF000',
-		     -text => '#FFFFFF');
+		     -bgcolor => '#98B8D8');
 print $q->h2('Success');
 print "\nBecause your previous URL:\n";
-print $q->blockquote($q->a({'href' => $ENV{'HTTP_REFERER'}},
+print $q->br;
+print $q->br;
+print $q->blockquote($q->a({-href => $ENV{'HTTP_REFERER'}},
 		     $ENV{'HTTP_REFERER'}));
+print $q->p;
 print "\ncontained the string:\n";
+print $q->br;
 print $q->blockquote($q->b($referrer_url));
+print $q->p;
 print "\nand so you were allowed to access the\n";
-print $q->b("forced referrer CGI");
+print $q->i("forced referrer CGI");
 print ".\n";
 print $q->p;
 print "\nFYI: The\n";
-print $q->a({'href' => "${mysrc}"}, 'source');
+print $q->a({-href => "${mysrc}"}, 'source');
 print "\nfor this CGI is available.\n";
 print $q->p;
+print "\nGo ";
+print $q->a({-href => "${bounce_url}"}, 'back'), ".\n";
 print $q->end_html;
 exit(0);

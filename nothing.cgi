@@ -15,7 +15,8 @@ use strict;
 close(STDIN);
 select(STDOUT);
 $| = 1;
-$SIG{ALRM} = sub { print "HTML><HEAD><TITLE>timeout<//TITLE></HEAD><BODY> " .
+$SIG{ALRM} = sub { print "content-type: text/html\n\n" .
+			 "HTML><HEAD><TITLE>timeout<//TITLE></HEAD><BODY> " .
 			 "time limit </BODY></HTML>\n"; exit(1); };
 alarm(5);
 
@@ -29,7 +30,8 @@ my $content;		# $html content
 $html = "/err/index.html";
 $html = "/web/isthe/chroot/index.html";    #-# real location
 open(HTML, "<$html") ||
-  die "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
+  die "content-type: text/html\n\n" .
+      "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
       "cannot open $html </BODY></HTML>\n";
 
 # read in the entire file
@@ -37,7 +39,8 @@ open(HTML, "<$html") ||
 undef $/;
 $content = <HTML>;
 if (! defined $content) {
-  die "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
+  die "content-type: text/html\n\n" .
+      "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
       "cannot read $html </BODY></HTML>\n";
 }
 

@@ -20,11 +20,13 @@ export argv0
 #
 # This section is only invoked if we are executoed as html.cat.cat
 #
-if [ X"$argv0" = X"html.cat" ]; then
+if [ X"$argv0" = X"html" ]; then
 
     # we are being executed as html.cat, display info about html.cat
     #
     /sbin/cat <<HTML_INFO1 | sed -e 's/^    //'
+    content-type: text/html
+
     <HTML>
     <HEAD>
     <TITLE> How to use html.cat </TITLE>
@@ -46,22 +48,18 @@ if [ X"$argv0" = X"html.cat" ]; then
 
     <P></P>
 
-    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.bin">
-    http://prime.corp.sgi.com/cgi-bin/test.cgi.bin</A><BR>
-    or:<DD><A HREF="http:/cgi-bin/test.cgi.bin">http:/cgi-bin/test.cgi.bin</A>
+    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
+    http://prime.corp.sgi.com/cgi-bin/test.cgi.cat</A><BR>
+    or:<DD><A HREF="http:/cgi-bin/test.cgi.cat">http:/cgi-bin/test.cgi.cat</A>
 
     <P></P>
 
     will display the contents of <B>test.cgi</B>.
 
-    <P></P>
-
     <HR>
 
-    <P></P>
-
-    This html document was produced by <B>html.cat</B>.  The source to
-    this script is as follows:
+    This html document was produced by <B>html</B>.  The source to
+    <B>html</B> is as follows:
 
     <P></P>
 
@@ -70,14 +68,12 @@ HTML_INFO1
 
     # display the source to html.cat
     #
-    /sbin/sed -f html.sed "$argv0" | sed -e 's/^/    /'
+    /sbin/sed -f html.sed "$argv0"
 
     # display the remainder of the info
     #
     /sbin/cat <<HTML_INFO2 | sed -e 's/^    //'
     </PRE>
-
-    <P></P>
 
     <HR>
 
@@ -98,10 +94,23 @@ fi
 
 # html header goodies
 #
-echo "content-type: text/html
+/sbin/cat <<HTML_INFO3
+content-type: text/html
 
-"
-echo "<PRE>"
+<HTML>
+<HEAD>
+<TITLE> How to use html.cat </TITLE>
+</HEAD>
+
+<H1> <A HREF="http://prime.corp.sgi.com/cgi-bin/$argv0">
+http://prime.corp.sgi.com/cgi-bin/$argv0</A>
+source
+</H1>
+
+<HR>
+
+<PRE>
+HTML_INFO3
 
 # pump out the file
 #
@@ -109,4 +118,17 @@ echo "<PRE>"
 
 # final html
 #
-echo "</PRE>"
+/sbin/cat <<HTML_INFO4
+</PRE>
+
+<HR>
+
+<ADDRESS>
+Landon Curt Noll 
+(<A HREF="//prime.corp.sgi.com/chongo.html">chongo@corp.sgi.com</a>)<br>
+<A HREF="//prime.corp.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
+<A HREF="//prime.corp.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+</ADDRESS>
+</BODY>
+</HTML>
+HTML_INFO4

@@ -63,6 +63,7 @@ if [ X"$argv0" = X"html" ]; then
 
     <P></P>
 
+    <CODE>
     <PRE>
 HTML_INFO1
 
@@ -74,6 +75,7 @@ HTML_INFO1
     #
     /sbin/cat <<HTML_INFO2 | sed -e 's/^    //'
     </PRE>
+    </CODE>
 
     <HR>
 
@@ -109,6 +111,7 @@ source
 
 <HR>
 
+<CODE>
 <PRE>
 HTML_INFO3
 
@@ -120,6 +123,7 @@ HTML_INFO3
 #
 /sbin/cat <<HTML_INFO4
 </PRE>
+</CODE>
 
 <HR>
 

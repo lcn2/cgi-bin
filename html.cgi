@@ -39,7 +39,7 @@ View the <A HREF="/chongo/tech/comp/cgi/html_cgi.txt">html.cgi</A> source.
 <P>
 
 Return to the <A HREF="/chongo/tech/comp/cgi/cgidemo.html">CGI</A> 
-sutff page.
+stuff page.
 
 <HR>
 

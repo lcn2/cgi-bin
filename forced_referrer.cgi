@@ -69,7 +69,6 @@ if (cgi_error()) {
     print "Error: ", cgi_error(), "\n";
     exit(1);
 }
-$q->use_named_parameters(1);
 ($myself = $q->self_url) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 

@@ -142,7 +142,7 @@ HTML_INFO1
 Landon Curt Noll 
 (<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
 <A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.csd.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+<A HREF="//prime.csd.sgi.com/html/bat.html"><strong>/\oo/\</strong></a>
 </ADDRESS>
 </BODY>
 </HTML>
@@ -197,7 +197,7 @@ print <<HTML_INFO4;
 Landon Curt Noll 
 (<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
 <A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.csd.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+<A HREF="//prime.csd.sgi.com/html/bat.html"><strong>/\oo/\</strong></a>
 </ADDRESS>
 </BODY>
 </HTML>

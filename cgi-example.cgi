@@ -21,7 +21,7 @@ $q->use_named_parameters(1);
 # print the HTML form
 #
 print $q->header,
-      $q->start_html('A Simple Example'),
+      $q->start_html('title' => 'A Simple Example'),
       $q->h1('A Simple Example'),
       $q->start_form,
       "What's your name? ",

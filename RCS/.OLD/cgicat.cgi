@@ -64,18 +64,18 @@ a selected cgi-bin script.
 
 <P></P>
 
-Say you want to be able to view the file <B>test.cgi</B>.<BR>
-If the cgi-bin file <B>test.cgi.txt</B> is a link to <B>cgicat.cgi</B>
+Say you want to be able to view the file <B>whoami.cgi</B>.<BR>
+If the cgi-bin file <B>whoami.cgi.txt</B> is a link to <B>cgicat.cgi</B>
 then invocation of the URL:
 
 <BLOCKQUOTE>
-<A HREF="/cgi-bin/test.cgi.txt">/cgi-bin/test.cgi.txt</A>
+<A HREF="/cgi-bin/whoami.cgi.txt">/cgi-bin/whoami.cgi.txt</A>
 </BLOCKQUOTE>
 
 will display the contents of:
 
 <BLOCKQUOTE>
-<A HREF="/cgi-bin/test.cgi">/cgi-bin/test.cgi</A>
+<A HREF="/cgi-bin/whoami.cgi">/cgi-bin/whoami.cgi</A>
 </BLOCKQUOTE>
 
 <HR>
@@ -87,8 +87,8 @@ The following are some cgi-bin scripts that you can view:
 <UL>
 <LI><A HREF="/cgi-bin/html.cgi.txt">html.cgi</A> 
 (an example of an CGI returning HTML)<BR>
-<LI><A HREF="/cgi-bin/test.cgi.txt">test.cgi</A> 
-(test server for CGI/1.1 conformance)<BR>
+<LI><A HREF="/cgi-bin/whoami.cgi.txt">whoami.cgi</A> 
+(determine what a Browser tells a server)<BR>
 <LI><A HREF="/cgi-bin/versions-b.cgi.txt">versions-b.cgi</A> 
 (display versions -b output)<BR>
 <LI><A HREF="/cgi-bin/showprods-3EFn.cgi.txt">showprods-3EFn.cgi</A> 
@@ -106,8 +106,8 @@ and here is where you can run them:
 <UL>
 <LI><A HREF="/cgi-bin/html.cgi">html.cgi</A> 
 (an example of an CGI returning HTML)<BR>
-<LI><A HREF="/cgi-bin/test.cgi">test.cgi</A> 
-(test server for CGI/1.1 conformance)<BR>
+<LI><A HREF="/cgi-bin/whoami.cgi">whoami.cgi</A> 
+(determine what a Browser tells a server)<BR>
 <LI><A HREF="/cgi-bin/versions-b.cgi">versions-b.cgi</A> 
 (display versions -b output)<BR>
 <LI><A HREF="/cgi-bin/showprods-3EFn.cgi">showprods-3EFn.cgi</A> 

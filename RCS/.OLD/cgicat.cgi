@@ -32,7 +32,7 @@ if [ X"$argv0" = X"cgicat" ]; then
     <TITLE> How to use cgicat </TITLE>
     </HEAD>
 
-    <BODY>
+    <BODY BGCOLOR="#80A0C0">
     <H1> How to use cgicat </H1>
 
     <HR>

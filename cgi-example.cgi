@@ -13,6 +13,7 @@ use strict;
 #
 my $q;		# our CGI object
 my $myself;	# this URL
+my $h;		# HTML element
 
 # setup
 #
@@ -61,5 +62,7 @@ if ($q->param()) {
 # our stand trailer
 #
 $myself = $q->self_url;
-print "The <A HREF='", $myself, ".cat'>source code</A> to this program.\n";
+print "You can view the ",
+    $q->a({'href' => $myself.".cat"}, 'source code'),
+    " to this program.\n";
 print $q->hr, $q->end_html;

@@ -36,7 +36,7 @@ This html document was produced by html.cgi. <P>
 View the <A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi.cat">html.cgi</A> source.
 <P>
 
-Return to the <A HREF="//prime.csd.sgi.com/sample/cgi.html#example">CGI</A> 
+Return to the <A HREF="//prime.csd.sgi.com/html/cgi.html#example">CGI</A> 
 example.
 
 <HR>
@@ -45,7 +45,7 @@ example.
 Landon Curt Noll 
 (<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
 <A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.csd.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+<A HREF="//prime.csd.sgi.com/html/bat.html"><strong>/\oo/\</strong></a>
 </ADDRESS>
 </BODY>
 </HTML>

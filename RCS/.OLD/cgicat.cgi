@@ -16,7 +16,7 @@
 echo "content-type: text/html
 
 "
-echo "<pre>"
+echo "<PRE>"
 
 # pump out the file
 #
@@ -24,4 +24,4 @@ echo "<pre>"
 
 # final html
 #
-echo "</pre>"
+echo "</PRE>"

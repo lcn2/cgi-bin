@@ -14,32 +14,32 @@ echo
 # return the HTML document
 #
 cat <<END_OF_FILE
-<html>
-<head>
-<title> HTML returned by html.cgi </title>
-</head>
+<HTML>
+<HEAD>
+<TITLE> HTML returned by html.cgi </TITLE>
+</HEAD>
 
-<body>
-<h1> HTML returned by html.cgi </h1>
+<BODY>
+<H1> HTML returned by html.cgi </H1>
 
-<hr>
+<HR>
 
-This html document was produced by html.cgi. <p>
+This html document was produced by html.cgi. <P>
 
-View the <a href="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat"> html.cgi</a> source.
-<p>
+View the <A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat">html.cgi</A> source.
+<P>
 
-Return to the <a href="//prime.corp.sgi.com/sample/cgi.html"> CGI</a> 
+Return to the <A HREF="//prime.corp.sgi.com/sample/cgi.html">CGI</A> 
 example.
 
-<hr>
+<HR>
 
-<address>
+<ADDRESS>
 Landon Curt Noll 
-(<a href="//prime.corp.sgi.com/chongo.html">chongo@corp.sgi.com</a>)<br>
-<a href="//prime.corp.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<a href="//prime.corp.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
-</address>
-</body>
-</html>
+(<A HREF="//prime.corp.sgi.com/chongo.html">chongo@corp.sgi.com</a>)<br>
+<A HREF="//prime.corp.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
+<A HREF="//prime.corp.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
+</ADDRESS>
+</BODY>
+</HTML>
 END_OF_FILE

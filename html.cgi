@@ -19,7 +19,7 @@ cat <<END_OF_FILE
 <TITLE> HTML returned by html.cgi </TITLE>
 </HEAD>
 
-<BODY>
+<BODY BGCOLOR="#80A0C0">
 <H1> HTML returned by html.cgi </H1>
 
 <HR>

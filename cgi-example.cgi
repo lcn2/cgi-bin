@@ -6,35 +6,53 @@
 
 # requirements
 #
-use CGI qw/:standard/;
+use CGI qw(:standard);
 use strict;
+
+# my vars
+#
+my $q;	# our CGI object
+
+# setup
+#
+$q = new CGI;
+$q->use_named_parameters(1);
 
 # print the HTML form
 #
-print header,
-      start_html('A Simple Example'),
-      h1('A Simple Example'),
-      start_form,
-      "What's your name? ",textfield('name'),p,
-      "What's the combination?", p,
-      checkbox_group('-name'=>'words',
-		     '-values'=>['eenie','meenie','minie','moe'],
-		     '-defaults'=>['eenie','minie']), p,
+print $q->header,
+      $q->start_html('A Simple Example'),
+      $q->h1('A Simple Example'),
+      $q->start_form,
+      "What's your name? ",
+      $q->textfield('name' => 'yourname',
+		    'default' => 'Your name here'),
+      $q->p,
+      "What's the combination? ", 
+      $q->checkbox_group('name' => 'words',
+			 'values' => ['eenie','meenie','minie','moe'],
+			 'defaults' => ['eenie','minie']), 
+      $q->p,
       "What's your favorite color? ",
-      popup_menu('-name'=>'color',
-		 '-values'=>['green','red','blue','chartreuse']),
-      p,
-      submit,
-      end_form,
-      hr;
+      $q->popup_menu('name' => 'color',
+		     'values' => ['green','red','blue','chartreuse']),
+      $q->p,
+      $q->submit,
+      $q->end_form,
+      $q->hr;
 
 # post the reply
 #
-if (param()) {
-    print p,
-	  "Your name is: ",em(param('name')),p,
-	  "The keywords are: ",em(join(", ",param('words'))),p,
-	  "Your favorite color is ",em(param('color')),
-	  p,
-	  hr;
+if ($q->param()) {
+    print $q->p,
+	  "Your name is: ", 
+	  $q->b($q->param('yourname')),
+	  $q->p,
+	  "The keywords are: ", 
+	  $q->em(join(", ", $q->param('words'))),
+	  $q->p,
+	  "Your favorite color is: ", 
+	  $q->tt(param('color')),
+	  $q->p,
+	  $q->hr;
 }

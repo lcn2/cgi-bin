@@ -4,16 +4,15 @@
 # cgicat - cat a cgi-bin script in html form
 #
 # usage:
-#	xxx.cat
+#	xxx.txt
 #
 #	Cat the file xxx so that the reader does not interpret the
-#	usual html magic characters.  The basename (minus the .cat)
+#	usual html magic characters.  The basename (minus the .txt)
 #	is the file to cat.
 
 # setup
 #
 use strict;
-require 5.003;
 #select(STDOUT);
 $| = 1;
 
@@ -22,11 +21,13 @@ $| = 1;
 my $argv0;
 my $line;
 
-# obtain the basename of the arg without any .cat
+# obtain the basename of the arg without any .txt
+# for backward compat, we also strip off .cat
 #
 $argv0 = $0;
 $argv0 =~ s/^.*\///o;
 $argv0 =~ s/\.cat$//o;
+$argv0 =~ s/\.txt$//o;
 if ($argv0 =~ /^([-\@\w.]+)$/) {
     $argv0 = $1;
 } else {
@@ -39,11 +40,11 @@ open(CGIFILE, "<$argv0") || die "cannot open $argv0\n";
 
 # special code to explain how to use cgicat
 #
-# This section is only invoked if we are executed as cgicat.cat
+# This section is only invoked if we are executed as cgicat.txt
 #
 if ($argv0 =~ /cgicat/) {
 
-    # we are being executed as cgicat.cat, display info about cgicat.cat
+    # we are being executed as cgicat.txt, display info about cgicat.txt
     #
     print <<HTML_INFO1;
 content-type: text/html
@@ -63,18 +64,19 @@ a selected cgi-bin script.
 
 <P></P>
 
-Say you want to be able to view the file <B>test.cgi</B>.  If the
-cgi-bin file <B>test.cgi.cat</B> is a link to <B>cgicat.cgi</B>
-then execution of the URL:
+Say you want to be able to view the file <B>test.cgi</B>.<BR>
+If the cgi-bin file <B>test.cgi.txt</B> is a link to <B>cgicat.cgi</B>
+then invocation of the URL:
 
-<P></P>
+<BLOCKQUOTE>
+<A HREF="/cgi-bin/test.cgi.txt">/cgi-bin/test.cgi.txt</A>
+</BLOCKQUOTE>
 
-<DD><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi.cat">
-http://prime.csd.sgi.com/cgi-bin/test.cgi.cat</A>
+will display the contents of:
 
-<P></P>
-
-will display the contents of <B>test.cgi</B>.
+<BLOCKQUOTE>
+<A HREF="/cgi-bin/test.cgi">/cgi-bin/test.cgi</A>
+</BLOCKQUOTE>
 
 <HR>
 
@@ -83,18 +85,18 @@ The following are some cgi-bin scripts that you can view:
 <P></P>
 
 <UL>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi.cat">
-html.cgi</A> (an example of an CGI returning HTML)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi.cat">
-test.cgi</A> (test server for CGI/1.1 conformance)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/versions-b.cgi.cat">
-versions-b.cgi</A> (display versions -b output)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/showprods-3EFn.cgi.cat">
-showprods-3EFn.cgi</A> (display showprods -3EFn output)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/MachineInfo.cgi.cat">
-MachineInfo.cgi</A> (display hinv output in table form)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/sample.cgi.cat">
-sample.cgi</A> (allows access to chongo's sample directory)
+<LI><A HREF="/cgi-bin/html.cgi.txt">html.cgi</A> 
+(an example of an CGI returning HTML)<BR>
+<LI><A HREF="/cgi-bin/test.cgi.txt">test.cgi</A> 
+(test server for CGI/1.1 conformance)<BR>
+<LI><A HREF="/cgi-bin/versions-b.cgi.txt">versions-b.cgi</A> 
+(display versions -b output)<BR>
+<LI><A HREF="/cgi-bin/showprods-3EFn.cgi.txt">showprods-3EFn.cgi</A> 
+(display showprods -3EFn output)<BR>
+<LI><A HREF="/cgi-bin/MachineInfo.cgi.txt">MachineInfo.cgi</A> 
+(display hinv output in table form)<BR>
+<LI><A HREF="/cgi-bin/sample.cgi.txt">sample.cgi</A> 
+(allows access to chongo's sample directory)
 </UL>
 
 and here is where you can run them:
@@ -102,18 +104,18 @@ and here is where you can run them:
 <P></P>
 
 <UL>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi">
-html.cgi</A> (an example of an CGI returning HTML)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi">
-test.cgi</A> (test server for CGI/1.1 conformance)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/versions-b.cgi">
-versions-b.cgi</A> (display versions -b output)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/showprods-3EFn.cgi">
-showprods-3EFn.cgi</A> (display showprods -3EFn output)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/MachineInfo.cgi">
-MachineInfo.cgi</A> (display hinv output in table form)<BR>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/sample.cgi">
-sample.cgi</A> (allows access to chongo's sample directory)
+<LI><A HREF="/cgi-bin/html.cgi">html.cgi</A> 
+(an example of an CGI returning HTML)<BR>
+<LI><A HREF="/cgi-bin/test.cgi">test.cgi</A> 
+(test server for CGI/1.1 conformance)<BR>
+<LI><A HREF="/cgi-bin/versions-b.cgi">versions-b.cgi</A> 
+(display versions -b output)<BR>
+<LI><A HREF="/cgi-bin/showprods-3EFn.cgi">showprods-3EFn.cgi</A> 
+(display showprods -3EFn output)<BR>
+<LI><A HREF="/cgi-bin/MachineInfo.cgi">MachineInfo.cgi</A> 
+(display hinv output in table form)<BR>
+<LI><A HREF="/cgi-bin/sample.cgi">sample.cgi</A> 
+(allows access to chongo's sample directory)
 </UL>
 
 <HR>
@@ -146,12 +148,13 @@ HTML_INFO1
 
 <HR>
 
-<ADDRESS>
-Landon Curt Noll 
-(<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
-<A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.csd.sgi.com/html/bat.html"><strong>/\\oo/\\</strong></a>
-</ADDRESS>
+<H3>Author:</H3>
+<BLOCKQUOTE>
+<A HREF="/chongo/index.html">chongo</A>
+&lt; Landon Curt Noll &gt;
+<STRONG>/\\oo/\\</STRONG>
+</BLOCKQUOTE>
+
 </BODY>
 </HTML>
 HTML_INFO2
@@ -172,8 +175,7 @@ content-type: text/html
 </HEAD>
 
 <BODY BGCOLOR="#80A0C0">
-<H1> <A HREF="http://prime.csd.sgi.com/cgi-bin/$argv0">
-http://prime.csd.sgi.com/cgi-bin/$argv0</A>
+<H1> <A HREF="/cgi-bin/$argv0">/cgi-bin/$argv0</A>
 source listing
 </H1>
 
@@ -201,12 +203,13 @@ print <<HTML_INFO4;
 
 <HR>
 
-<ADDRESS>
-Landon Curt Noll 
-(<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
-<A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
-<A HREF="//prime.csd.sgi.com/html/bat.html"><strong>/\\oo/\\</strong></a>
-</ADDRESS>
+<H3>Author:</H3>
+<BLOCKQUOTE>
+<A HREF="/chongo/index.html">chongo</A>
+&lt; Landon Curt Noll &gt;
+<STRONG>/\\oo/\\</STRONG>
+</BLOCKQUOTE>
+
 </BODY>
 </HTML>
 HTML_INFO4

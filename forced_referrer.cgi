@@ -22,18 +22,9 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 #
-# Comments, suggestions, bug fixes and questions about these routines
-# are welcome.  Send EMail to the address given below.
+# chongo (Landon Curt Noll, http://www.isthe.com/chongo/index.html) /\oo/\
 #
-# Happy bit twiddling,
-#
-#                       Landon Curt Noll
-#
-#                       {chongo,noll}@{toad,sgi}.com
-#                       http://reality.sgi.com/chongo
-#
-# chongo was here       /\../\
-#
+# Share and enjoy! :-)
 
 # requirements
 #

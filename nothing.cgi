@@ -1,10 +1,9 @@
 #!/usr/bin/perl -wT
-# @(#)cgicat	1.1 10 Oct 1995 03:23:08
 #
-# index.html.cgi - cat the generic index.html file
+# nothing.cgi - CGI to redirect user to another page
 #
 # usage:
-#	index.html
+#	nothing.cgi
 
 # setup
 #
@@ -22,32 +21,22 @@ alarm(5);
 
 # my vars
 #
-my $html;		# URL :-)
-my $content;		# $html content
+my $redirect = "http://www.isthe.com/err/index.html";
 
-# open the html file
+# Output the redirection
 #
-$html = "/err/index.html";
-$html = "/web/isthe/chroot/index.html";    #-# real location
-open(HTML, "<$html") ||
-  die "Content-type: text/html\n\n" .
-      "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
-      "cannot open $html </BODY></HTML>\n";
+print <<END_OF_FILE;
+HTTP/1.0 302 Moved Temporarily
+Connection: close
+Content-Type: text/html; charset=ISO-8859-1
+Location: $redirect
 
-# read in the entire file
-#
-undef $/;
-$content = <HTML>;
-if (! defined $content) {
-  die "Content-type: text/html\n\n" .
-      "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
-      "cannot read $html </BODY></HTML>\n";
-}
-
-# write the entire file - ignore write errors
-#
-print "Content-type: text/html\n\n";
-print "$content";
+<HTML><HEAD><TITLE>302 Moved Temporarily</TITLE></HEAD>
+<BODY>
+<H1>302 Moved</H1>The document has moved
+<A HREF="$redirect">here</A>.
+</BODY></HTML>
+END_OF_FILE
 
 # all done
 #

@@ -5,9 +5,9 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.13 $
-# @(#) $Id: cgi-example.cgi,v 1.13 2002/03/14 20:09:54 chongo Exp $
-# @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cgi-example.cgi,v $
+# @(#) $Revision: 1.1 $
+# @(#) $Id: cookie.cgi,v 1.1 2002/09/29 00:07:22 chongo Exp chongo $
+# @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cookie.cgi,v $
 #
 # Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
 #
@@ -36,9 +36,9 @@
 # requirements
 #
 use CGI qw(:standard);
-use Sys::Hostname;
 use CGI::Cookie;
-use CGI::Carp;
+use CGI::Carp qw(fatalsToBrowser warningsToBrowser set_message);
+set_message("This error came from a CGI program");
 use strict;
 
 # For DOS (Denial Of Service) protection prevent file uploads and
@@ -50,33 +50,49 @@ $CGI::DISABLE_UPLOADS = 1;	# no uploads
 # my vars
 #
 my $q;		# our CGI object
-my $myself;	# this URL
-my %cookies;	# collection of cookies returned by the browser
+my $myself;	# the URL of this CGI script
+my $mybaseself;	# the basename of the URL of this CGI script
+my %early_cookies;	# collection of cookies received by the browser
+my %cookies;		# collection of cookies sent to the browser
 my $cookie_set;	# collection of all cookies
 my $cookie;	# individual cookie
 
 # setup
 #
 $q = new CGI;
+$myself = $q->self_url;
+if (defined $myself) {
+    set_message("This error came from $myself");
+}
 if (cgi_error()) {
-    print "Content-type: text/plain\n\n";
-    print "Your browser sent bad or too much data!\n";
-    print "Error: ", cgi_error(), "\n";
-    exit(1);
+    if (defined cgi_error()) {
+	croak("Your browser sent bad or too much data!\n" .
+	      "Error: " . cgi_error() . "\n");
+    } else {
+	croak("Your browser sent bad or too much data!\n" .
+	      "no cgi_error value returned\n");
+    }
+    exit(1);	# paranoia
 }
 
-# fetch all of the cookies give to us by the browser
+# fetch all of the cookies given to us by the browser
 #
+%early_cookies = fetch CGI::Cookie;
 %cookies = fetch CGI::Cookie;
 
-# all/alter the cookie set
+# form the new cookie (or old cookie with submitted values)
 #
 if (defined $q->param('name') && defined $q->param('value')) {
+
+    # form a brand new cookie based on the current fields
+    #
     $cookie = new CGI::Cookie(-name => $q->param('name'),
     			       -value => $q->param('value'));
     $cookie->domain($q->param('domain')) if defined $q->param('domain');
     $cookie->path($q->param('path')) if defined $q->param('path');
-#   $cookie->secure($q->param('secure')) if defined $q->param('secure');
+
+    # add/change the cookie set with the new cookie
+    #
     $cookies{$q->param('name')} = $cookie;
 }
 
@@ -95,12 +111,23 @@ if (length($cookie_set) > 0) {
 } else {
     print $q->header(), "\n";
 }
-print $q->start_html(-title => 'CGI Example #1',
+warningsToBrowser(1);
+print $q->start_html(-title => 'Cookie Example',
 		     -bgcolor => '#98B8D8'), "\n";
-print $q->h1('CGI Example #1'), "\n";
+print $q->h1('HTTP Cookies'), "\n";
+
+# print the cookies we initial received by the browser before submit
+#
+print $q->h2('Your browser sent our server these cookies');
+foreach (keys %early_cookies) {
+    print $early_cookies{$_}->as_string;
+    print $q->br, "\n";
+}
+print $q->hr, "\n";
 
 # print the HTML form
 #
+print $q->h2('Set the cookie parameters and press Submit');
 print $q->start_form(-method => 'POST'), "\n";
 print "cookie name: ", "\n";
 print $q->textfield(-name => 'name',
@@ -123,12 +150,8 @@ print $q->br, "\n";
 print "cookie path: ", "\n";
 print $q->textfield(-name => 'path',
 		    -default => '/'), "\n";
-#print $q->p, "\n";
-#print "Secure: ", "\n";
-#print $q->checkbox(-name => 'secure',
-#		   -checked => '',
-#		   -value => 'true',
-#		   -label => ' <== send only over SSL'), "\n";
+# NOTE: We will ignore the secure cookie issue for now
+#
 print $q->p, "\n";
 print $q->submit(-name => 'Submit'), "\n";
 print $q->end_form, "\n";
@@ -136,7 +159,7 @@ print $q->hr, "\n";
 
 # print the cookies we will send
 #
-print $q->h2('Cookies sent on Submit');
+print $q->h2('Cookies sent to your browser after Submit is pressed');
 foreach (keys %cookies) {
     print $cookies{$_}->as_string;
     print $q->br, "\n";
@@ -145,7 +168,8 @@ print $q->hr, "\n";
 
 # print the cookie header
 #
-print $q->h2('HTTP Set-Cookie header sent on Submit'), "\n";
+print $q->h2('HTTP Set-Cookie header sent to your browser after ' .
+	     'Submit is pressed'), "\n";
 if (length($cookie_set) > 0) {
     print $q->pre("Set-Cookie: $cookie_set"), "\n";
 } else {
@@ -153,14 +177,13 @@ if (length($cookie_set) > 0) {
 }
 print $q->hr, "\n";
 
-
 # our standard trailer
 #
-($myself = $q->self_url) =~ s/\?.*$//;
-$myself =~ s/.*\///;
-$myself =~ s/\.cgi/_cgi/;
+($mybaseself = $myself) =~ s/\?.*$//;
+$mybaseself =~ s/.*\///;
+$mybaseself =~ s/\.cgi/_cgi/;
 print "You can view the ";
-print $q->a({-href => "/chongo/tech/comp/cgi/".$myself.".txt"},
+print $q->a({-href => "/chongo/tech/comp/cgi/".$mybaseself.".txt"},
 	    'source code'), "\n";
 print " to this program.\n";
 print $q->hr, "\n";

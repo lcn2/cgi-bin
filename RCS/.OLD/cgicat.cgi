@@ -43,13 +43,13 @@ if [ X"$argv0" = X"cgicat" ]; then
     <P></P>
 
     Say you want to be able to view the file <B>test.cgi</B>.  If the
-    cgi-bin file <B>test.cat.cgi</B> is a link to <B>cgicat.cgi</B>
+    cgi-bin file <B>test.cgi.cat</B> is a link to <B>cgicat.cgi</B>
     then execution of the URL:
 
     <P></P>
 
-    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cat.cgi">
-    http://prime.corp.sgi.com/cgi-bin/test.cat.cgi</A>
+    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
+    http://prime.corp.sgi.com/cgi-bin/test.cgi.cat</A>
 
     <P></P>
 
@@ -62,15 +62,15 @@ if [ X"$argv0" = X"cgicat" ]; then
     <P></P>
 
     <UL>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cat.cgi">
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cgi.cat">
     hitcount.cgi</A> (maintain and display page usage count)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cat.cgi">
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat">
     html.cgi</A> (an example of an CGI returning HTML)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cat.cgi">
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi.cat">
     showcount.cgi</A> (demo of usage count lookup and modify)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cat.cgi">
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
     test.cgi</A> (test server for CGI/1.1 conformance)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cat.cgi">
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cgi.cat">
     versions-b.cgi</A> (display versions -b output)<BR>
     </UL>
 

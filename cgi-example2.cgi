@@ -172,6 +172,6 @@ if ($action eq 'default' || $action eq 'edit') {
 #
 $myself = $q->self_url;
 print "You can view the ",
-    $q->a({'href' => $myself.".cat"}, 'source code'),
+    $q->a({'href' => $myself.".txt"}, 'source code'),
     " to this program.\n";
 print $q->hr, $q->end_html;

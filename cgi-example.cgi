@@ -93,6 +93,6 @@ if ($q->param() && !defined($q->param('override'))) {
 #
 ($myself = $q->self_url) =~ s/\?.*$//;
 print "You can view the ",
-    $q->a({'href' => $myself.".cat"}, 'source code'),
+    $q->a({'href' => $myself.".txt"}, 'source code'),
     " to this program.\n";
 print $q->hr, $q->end_html;

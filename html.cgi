@@ -2,6 +2,9 @@
 # @(#)html.cgi	1.4 10 Oct 1995 03:31:37
 #
 # html.cgi - an example of an CGI returning HTML
+#
+# NOTE: This does things the hard way, but it works.
+#	See the Perl CGI examples for a better method.
 
 # setup
 #
@@ -25,7 +28,7 @@ print <<END_OF_FILE;
 <TITLE> HTML returned by html.cgi </TITLE>
 </HEAD>
 
-<BODY BGCOLOR="#80A0C0">
+<BODY BGCOLOR="#98B8D8">
 <H1> HTML returned by html.cgi </H1>
 
 <HR>
@@ -43,7 +46,7 @@ sutff page.
 <H3>Author:</H3>
 <BLOCKQUOTE>
 <A HREF="/chongo/index.html">chongo</A>
-&lt; Landon Curt Noll &gt;
+&lt;Landon Curt Noll&gt;
 <STRONG>/\\oo/\\</STRONG>
 </BLOCKQUOTE>
 

@@ -11,7 +11,8 @@ use strict;
 
 # my vars
 #
-my $q;	# our CGI object
+my $q;		# our CGI object
+my $myself;	# this URL
 
 # setup
 #
@@ -56,3 +57,9 @@ if ($q->param()) {
 	  $q->p,
 	  $q->hr;
 }
+
+# our stand trailer
+#
+$myself = $q->self_url;
+print "The <A HREF='", $myself, ".cat'>source code</A> to this program.\n";
+print $q->hr, $q->end_html;

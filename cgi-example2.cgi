@@ -13,8 +13,9 @@ use strict;
 
 # my vars
 #
-my $q;						# our CGI object
-my $name;					# name of a parameter
+my $q;			# our CGI object
+my $name;		# name of a parameter
+my $myself;		# this URL
 
 # set param defaults
 #
@@ -167,6 +168,8 @@ if ($action eq 'default' || $action eq 'edit') {
       $q->h2('Thank you for your submission');
 }
 
-# print the HTML trailers
+# our stand trailer
 #
-print $q->end_html;
+$myself = $q->self_url;
+print "The <A HREF='", $myself, ".cat'>source code</A> to this program.\n";
+print $q->hr, $q->end_html;

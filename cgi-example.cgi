@@ -9,6 +9,12 @@
 use CGI qw(:standard);
 use strict;
 
+# For DOS (Denial Of Service) protection prevent file uploads and
+# really big "POSTS"
+#
+$CGI::POST_MAX = 1024;		# max post size
+$CGI::DISABLE_UPLOADS = 1;	# no uploads
+
 # my vars
 #
 my $q;		# our CGI object
@@ -19,6 +25,12 @@ my $override=0;	# 1 ==> override current value to use defaults
 # setup
 #
 $q = new CGI;
+if (cgi_error()) {
+    print "Content-type: text/plain\n\n";
+    print "Your browser sent bad or too much data!\n";
+    print "Error: ", cgi_error(), "\n";
+    exit(1);
+}
 $q->use_named_parameters(1);
 
 # determine the override value

@@ -90,8 +90,8 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
 	"\npage or you may click on that link to go there now.\n",
 	$q->p,
 	"\nFYI: The\n",
-	$q->a({'href' => $q->self_url . ".txt"}, 'this CGI script'),
-	"\nis available.\n",
+	$q->a({'href' => $q->self_url . ".txt"}, 'source'),
+	"\nfor this CGI demo script is available.\n",
 	$q->p,
 	$q->end_html;
      exit(1);
@@ -116,8 +116,8 @@ print $q->header,
     ".\n",
     $q->p,
     "\nFYI: The\n",
-    $q->a({'href' => $q->self_url . ".txt"}, 'this CGI script'),
-    "\nis available.\n",
+    $q->a({'href' => $q->self_url . ".txt"}, 'source'),
+    "\nfor this CGI demo script is available.\n",
     $q->p,
     $q->end_html;
 exit(0);

@@ -12,7 +12,7 @@
 
 # setup
 #
-argv0="`/sbin/basename $0 .cat`"
+argv0="`/sbin/basename $0 .cat.cgi`"
 export argv0
 
 
@@ -43,14 +43,13 @@ if [ X"$argv0" = X"cgibin" ]; then
     <P></P>
 
     Say you want to be able to view the file <B>test.cgi</B>.  If the
-    cgi-bin file <B>test.cgi.bin</B> is a link to <B>cgibin.cat</B>
+    cgi-bin file <B>test.cat.cgi</B> is a link to <B>cgibin.cgi</B>
     then execution of the URL:
 
     <P></P>
 
-    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
-    http://prime.corp.sgi.com/cgi-bin/test.cgi.cat</A><BR>
-    or:<DD><A HREF="http:/cgi-bin/test.cgi.cat">http:/cgi-bin/test.cgi.cat</A>
+    <DD><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cat.cgi">
+    http://prime.corp.sgi.com/cgi-bin/test.cat.cgi</A>
 
     <P></P>
 
@@ -63,16 +62,16 @@ if [ X"$argv0" = X"cgibin" ]; then
     <P></P>
 
     <UL>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cat">
-    hitcount.cat</A> (maintain and display page usage count)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat">
-    html.cgi.cat</A> (an example of an CGI returning HTML)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi.cat">
-    showcount.cgi.cat</A> (demo of usage count lookup and modify)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
-    test.cgi.cat</A> (test server for CGI/1.1 conformance)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cat">
-    versions-b.cat</A> (display versions -b output)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cat.cgi">
+    hitcount.cgi</A> (maintain and display page usage count)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cat.cgi">
+    html.cgi</A> (an example of an CGI returning HTML)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cat.cgi">
+    showcount.cgi</A> (demo of usage count lookup and modify)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cat.cgi">
+    test.cgi</A> (test server for CGI/1.1 conformance)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cat.cgi">
+    versions-b.cgi</A> (display versions -b output)<BR>
     </UL>
 
     and here is where you can run them:
@@ -80,23 +79,23 @@ if [ X"$argv0" = X"cgibin" ]; then
     <P></P>
 
     <UL>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount?hitcount+o">
-    hitcount</A> (maintain and display page usage count)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/hitcount.cgi?hitcount+o">
+    hitcount.cgi</A> (maintain and display page usage count)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi">
     html.cgi</A> (an example of an CGI returning HTML)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi">
     showcount.cgi</A> (demo of usage count lookup and modify)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi">
     test.cgi</A> (test server for CGI/1.1 conformance)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b">
-    versions-b</A> (display versions -b output)<BR>
+    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cgi">
+    versions-b.cgi</A> (display versions -b output)<BR>
     </UL>
 
     <HR>
 
     This html document that you are <I>now</I>
-    viewing was produced by <B>cgibin</B>.  
-    The source to <B>cgibin</B> is as follows:
+    viewing was produced by <B>cgibin.cgi</B>.  
+    The source to <B>cgibin.cgi</B> is as follows:
 
     <P></P>
 

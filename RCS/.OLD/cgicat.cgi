@@ -140,6 +140,7 @@ content-type: text/html
 <TITLE> $argv0 source listing </TITLE>
 </HEAD>
 
+<BODY BGCOLOR="#80A0C0">
 <H1> <A HREF="http://prime.corp.sgi.com/cgi-bin/$argv0">
 http://prime.corp.sgi.com/cgi-bin/$argv0</A>
 source listing

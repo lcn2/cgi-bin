@@ -172,7 +172,8 @@ if ($action eq 'default' || $action eq 'edit') {
 # our stand trailer
 #
 ($myself = $q->self_url) =~ s/\?.*$//;
+$myself =~ s/.*\///;
 print "You can view the ",
-    $q->a({'href' => $myself.".txt"}, 'source code'),
+    $q->a({'href' => "/chongo/misc/comp/".$myself.".txt"}, 'source code'),
     " to this program.\n";
 print $q->hr, $q->end_html;

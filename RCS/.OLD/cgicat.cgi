@@ -91,6 +91,8 @@ test.cgi</A> (test server for CGI/1.1 conformance)<BR>
 versions-b.cgi</A> (display versions -b output)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/showprods-3EFn.cgi.cat">
 showprods-3EFn.cgi</A> (display showprods -3EFn output)<BR>
+<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/MachineInfo.cgi.cat">
+MachineInfo.cgi</A> (display hinv output in table form)<BR>
 </UL>
 
 and here is where you can run them:
@@ -106,6 +108,8 @@ test.cgi</A> (test server for CGI/1.1 conformance)<BR>
 versions-b.cgi</A> (display versions -b output)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/showprods-3EFn.cgi">
 showprods-3EFn.cgi</A> (display showprods -3EFn output)<BR>
+<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/MachineInfo.cgi">
+MachineInfo.cgi</A> (display hinv output in table form)<BR>
 </UL>
 
 <HR>

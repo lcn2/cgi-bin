@@ -1,7 +1,7 @@
 #!/bin/sh
-# @(#)cgibin	1.1 10 Oct 1995 03:23:08
+# @(#)cgicat	1.1 10 Oct 1995 03:23:08
 #
-# cgibin - cat a cgi-bin script in html form
+# cgicat - cat a cgi-bin script in html form
 #
 # usage:
 #	xxx.cat
@@ -12,38 +12,38 @@
 
 # setup
 #
-argv0="`/sbin/basename $0 .cat.cgi`"
+argv0="`/sbin/basename $0 .cat`"
 export argv0
 
 
-# special code to explain how to use cgibin
+# special code to explain how to use cgicat
 #
-# This section is only invoked if we are executoed as cgibin.cat
+# This section is only invoked if we are executed as cgicat.cat
 #
-if [ X"$argv0" = X"cgibin" ]; then
+if [ X"$argv0" = X"cgicat" ]; then
 
-    # we are being executed as cgibin.cat, display info about cgibin.cat
+    # we are being executed as cgicat.cat, display info about cgicat.cat
     #
     /sbin/cat <<HTML_INFO1 | sed -e 's/^    //'
     content-type: text/html
 
     <HTML>
     <HEAD>
-    <TITLE> How to use cgibin </TITLE>
+    <TITLE> How to use cgicat </TITLE>
     </HEAD>
 
     <BODY>
-    <H1> How to use cgibin </H1>
+    <H1> How to use cgicat </H1>
 
     <HR>
 
-    The <B>cgibin.cat</B> cgi script allows one to view the source of
+    The <B>cgicat.cgi</B> cgi script allows one to view the source of
     a selected cgi-bin script.
 
     <P></P>
 
     Say you want to be able to view the file <B>test.cgi</B>.  If the
-    cgi-bin file <B>test.cat.cgi</B> is a link to <B>cgibin.cgi</B>
+    cgi-bin file <B>test.cat.cgi</B> is a link to <B>cgicat.cgi</B>
     then execution of the URL:
 
     <P></P>
@@ -94,8 +94,8 @@ if [ X"$argv0" = X"cgibin" ]; then
     <HR>
 
     This html document that you are <I>now</I>
-    viewing was produced by <B>cgibin.cgi</B>.  
-    The source to <B>cgibin.cgi</B> is as follows:
+    viewing was produced by <B>cgicat.cgi</B>.  
+    The source to <B>cgicat.cgi</B> is as follows:
 
     <P></P>
 
@@ -103,7 +103,7 @@ if [ X"$argv0" = X"cgibin" ]; then
     <PRE>
 HTML_INFO1
 
-    # display the source to cgibin
+    # display the source to cgicat
     #
     /sbin/sed -f html.sed "$argv0"
 

@@ -7,9 +7,9 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision$
-# @(#) $Id$
-# @(#) $Source$
+# @(#) $Revision: 1.13 $
+# @(#) $Id: cgi-example2.cgi,v 1.13 2002/03/14 20:09:54 chongo Exp chongo $
+# @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cgi-example2.cgi,v $
 #
 # Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
 #
@@ -171,7 +171,7 @@ if ($action eq 'default' || $action eq 'edit') {
     print $q->hidden(-name => 'do_edit',
 		     -value => 'cgi-example2.cgi'), "\n";
     foreach $name ( @parname ) {
-	my $value = $q->param($name), "\n";
+	my $value = $q->param($name);
 	if (defined $value) {
 	    print $q->hidden(-name => $name,
 	    		     -value => $value), "\n";
@@ -186,7 +186,7 @@ if ($action eq 'default' || $action eq 'edit') {
     print $q->hidden(-name => 'do_submit',
 		     -value => 'cgi-example2.cgi'), "\n";
     foreach $name ( @parname ) {
-	my $value = $q->param($name), "\n";
+	my $value = $q->param($name);
 	if (defined $value) {
 	    print $q->hidden(-name => $name,
 	    		     -value => $value), "\n";

@@ -66,8 +66,6 @@ if [ X"$argv0" = X"cgicat" ]; then
     hitcount.cgi</A> (maintain and display page usage count)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi.cat">
     html.cgi</A> (an example of an CGI returning HTML)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi.cat">
-    showcount.cgi</A> (demo of usage count lookup and modify)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi.cat">
     test.cgi</A> (test server for CGI/1.1 conformance)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cgi.cat">
@@ -83,8 +81,6 @@ if [ X"$argv0" = X"cgicat" ]; then
     hitcount.cgi</A> (maintain and display page usage count)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/html.cgi">
     html.cgi</A> (an example of an CGI returning HTML)<BR>
-    <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/showcount.cgi">
-    showcount.cgi</A> (demo of usage count lookup and modify)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/test.cgi">
     test.cgi</A> (test server for CGI/1.1 conformance)<BR>
     <DD><LI><A HREF="http://prime.corp.sgi.com/cgi-bin/versions-b.cgi">

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -wT
 #
-# cgi-example.cgi - Example of a CGI perl script
+# cgi-example.cgi - Example #1 of a CGI perl script
 #
 # This CGI script that creates a fill-out form and echoes back its values.
 
@@ -41,72 +41,73 @@ if ($q->param() && defined($q->param('override'))) {
 
 # print the HTML form
 #
-print $q->header,
-      $q->start_html('title' => 'A Simple Example'),
-      $q->h1('A Simple Example'),
-      $q->start_form('method' => 'POST'),
-      "What's your name? ",
-      $q->textfield('name' => 'yourname',
-		    'default' => 'Your name here',
-		    'override' => $override),
-      $q->p,
-      "What's the combination? ",
-      $q->checkbox_group('name' => 'words',
-			 'values' => ['eenie','meenie','minie','moe'],
-			 'defaults' => ['eenie','minie'],
-			 'override' => $override),
-      $q->p,
-      "What's your favorite color? ",
-      $q->popup_menu('name' => 'color',
-		     'values' => ['green','red','blue','chartreuse'],
-		     'override' => $override),
-      $q->p,
-      "Use coconuts: ",
-      $q->checkbox('name' => 'coconut',
-		   'checked' => '',
-		   'value' => 'true',
-		   'label' => ' <== Coconut checkbox',
-		   'override' => $override),
-      $q->p,
-      $q->submit('name' => 'Submit'),
-      " ",
-      $q->reset('name' => 'Reset to last values'),
-      $q->end_form,
-      $q->start_form,
-      $q->hidden('name' => 'override',
-		 'default' => '1',
-		 'override' => 1),
-      $q->submit('name' => 'Restore defaults'),
-      $q->end_form,
-      $q->hr;
+print $q->header;
+print $q->start_html(-title => 'CGI Example #1',
+		     -bgcolor => '#98B8D8');
+print $q->h1('CGI Example #1');
+print $q->start_form(-method => 'POST');
+print "What's your name? ";
+print $q->textfield(-name => 'yourname',
+		    -default => 'Your name here',
+		    -override => $override);
+print $q->p;
+print "What's the combination? ";
+print $q->checkbox_group(-name => 'words',
+			 -values => ['eenie','meenie','minie','moe'],
+			 -defaults => ['eenie','minie'],
+			 -override => $override);
+print $q->p;
+print "What's your favorite color? ";
+print $q->popup_menu(-name => 'color',
+		     -values => ['green','red','blue','chartreuse'],
+		     -override => $override);
+print $q->p;
+print "Use coconuts: ";
+print $q->checkbox(-name => 'coconut',
+		   -checked => '',
+		   -value => 'true',
+		   -label => ' <== Coconut checkbox',
+		   -override => $override);
+print $q->p;
+print $q->submit(-name => 'Submit');
+print " ";
+print $q->reset(-name => 'Reset to last values');
+print $q->end_form;
+print $q->start_form;
+print $q->hidden(-name => 'override',
+		 -default => '1',
+		 -override => 1);
+print $q->submit(-name => 'Restore defaults');
+print $q->end_form;
+print $q->hr;
 
 # post the reply
 #
 if ($q->param() && !defined($q->param('override'))) {
     print $q->p,
-	  "Your name is: ",
-	  $q->b($q->param('yourname')),
-	  $q->p,
-	  "The keywords are: ",
-	  $q->em(join(", ", $q->param('words'))),
-	  $q->p,
-	  "Your favorite color is: ",
-	  $q->tt(param('color')),
-	  $q->p,
-	  "The coconut value (if any) is: ",
-	  $q->b('{'),
-	  $q->param('coconut'),
-	  $q->b('}'),
-	  $q->p,
-	  $q->hr;
+    print "Your name is: ";
+    print $q->b($q->param('yourname'));
+    print $q->p;
+    print "The keywords are: ";
+    print $q->em(join(", ", $q->param('words')));
+    print $q->p;
+    print "Your favorite color is: ";
+    print $q->tt(param('color'));
+    print $q->p;
+    print "The coconut value (if any) is: ";
+    print $q->b('{');
+    print $q->param('coconut');
+    print $q->b('}');
+    print $q->p;
+    print $q->hr;
 }
 
-# our stand trailer
+# our standard trailer
 #
 ($myself = $q->self_url) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 $myself =~ s/\.cgi/_cgi/;
-print "You can view the ",
-    $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code'),
-    " to this program.\n";
+print "You can view the ";
+print $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code');
+print " to this program.\n";
 print $q->hr, $q->end_html;

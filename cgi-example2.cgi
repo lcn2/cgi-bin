@@ -26,9 +26,9 @@ my $myself;		# this URL
 
 # set param defaults
 #
-my @parname = qw(				
+my @parname = qw(
     yourname words color
-);	
+);
 my %pardef = (
     'yourname'	=> 'here',
     'words'	=> ['eenie','minie'],
@@ -89,34 +89,34 @@ if ($action eq 'default' || $action eq 'edit') {
 
     # print the HTML form for the user to play with
     #
-    print
-      $q->start_html('name' => 'Set your preferences'),
-      $q->h1('A Simple Example'),
-      $q->start_form,
-      "What's your name? ",
-      $q->textfield('name' => 'yourname',
-		    'value' => $pardef{'yourname'}),
-      $q->p,
-      "What's the combination? ", 
-      $q->checkbox_group('name' => 'words',
-			 'values' => ['eenie','meenie','minie','moe'],
-			 'defaults' => $pardef{'words'}), 
-      $q->p,
-      "What's your favorite color? ",
-      $q->popup_menu('name' => 'color',
-		     'values' => ['green','red','blue','chartreuse'],
-		     'defaults' => $pardef{'color'}),
-      $q->p,
-      $q->hidden('name' => 'do_preview',
-		 'value' => 'cgi-example2.cgi'),
-      $q->submit('name' => 'Preview'),
-      $q->end_form,
-      $q->start_form,
-      $q->submit('name' => 'Reset'),
-      $q->hidden('name' => 'do_default',
-		 'value' => 'cgi-example2.cgi'),
-      $q->end_form,
-      $q->hr;
+    print $q->start_html(-title => 'CGI Example #2',
+		         -bgcolor => '#98B8D8');
+    print $q->h1('CGI Example #2');
+    print $q->start_form;
+    print "What's your name? ";
+    print $q->textfield(-name => 'yourname',
+			-value => $pardef{'yourname'});
+    print $q->p;
+    print "What's the combination? ";
+    print $q->checkbox_group(-name => 'words',
+			     -values => ['eenie','meenie','minie','moe'],
+			     -defaults => $pardef{'words'});
+    print $q->p;
+    print "What's your favorite color? ";
+    print $q->popup_menu(-name => 'color',
+			 -values => ['green','red','blue','chartreuse'],
+			 -defaults => $pardef{'color'});
+    print $q->p;
+    print $q->hidden(-name => 'do_preview',
+		     -value => 'cgi-example2.cgi');
+    print $q->submit(-name => 'Preview');
+    print $q->end_form;
+    print $q->start_form;
+    print $q->submit(-name => 'Reset');
+    print $q->hidden(-name => 'do_default',
+		     -value => 'cgi-example2.cgi');
+    print $q->end_form;
+    print $q->hr;
 
 # Allow the user to preview their results with an option to edit or submit
 #
@@ -124,67 +124,63 @@ if ($action eq 'default' || $action eq 'edit') {
 #
 } elsif ($action eq 'preview') {
 
-    # preview the values 
+    # preview the values
     #
-    print 
-      $q->start_html('name' => 'Preview the values'),
-      $q->p,
-      $q->h2('Please review for correctness'),
-      $q->p,
-      "Your name is: ", $q->b($q->param('yourname')),
-      $q->p,
-      "The keywords are: ", $q->em(join(", ", $q->param('words'))),
-      $q->p,
-      "Your favorite color is: ", $q->tt(param('color')),
-      $q->p,
-      $q->hr;
+    print $q->start_html(-name => 'Preview the values');
+    print $q->p;
+    print $q->h2('Please review for correctness');
+    print $q->p;
+    print "Your name is: ", $q->b($q->param('yourname'));
+    print $q->p;
+    print "The keywords are: ", $q->em(join(", ", $q->param('words')));
+    print $q->p;
+    print "Your favorite color is: ", $q->tt(param('color'));
+    print $q->p;
+    print $q->hr;
 
     # give them a form to edit
     #
-    print
-      $q->start_form,
-      $q->hidden('name' => 'do_edit',
-		 'value' => 'cgi-example2.cgi');
+    print $q->start_form;
+    print $q->hidden(-name => 'do_edit',
+		     -value => 'cgi-example2.cgi');
     foreach $name ( @parname ) {
 	my $value = $q->param($name);
 	if (defined $value) {
-	    print $q->hidden('name' => $name, 'value' => $value);
+	    print $q->hidden(-name => $name,
+	    		     -value => $value);
 	}
     }
-    print
-      $q->submit('name' => 'Edit'),
-      $q->end_form;
+    print $q->submit(-name => 'Edit');
+    print $q->end_form;
 
     # give them a form to submit
     #
-    print
-      $q->start_form,
-      $q->hidden('name' => 'do_submit',
-		 'value' => 'cgi-example2.cgi');
+    print $q->start_form;
+    print $q->hidden(-name => 'do_submit',
+		     -value => 'cgi-example2.cgi');
     foreach $name ( @parname ) {
 	my $value = $q->param($name);
 	if (defined $value) {
-	    print $q->hidden('name' => $name, 'value' => $value);
+	    print $q->hidden(-name => $name,
+	    		     -value => $value);
 	}
     }
-    print
-      $q->submit('name' => 'Submit'),
-      $q->end_form;
+    print $q->submit(-name => 'Submit');
+    print $q->end_form;
 
 # post the reply for the submit action
 #
 } else {
-    print 
-      $q->start_html('name' => 'Thanks'),
-      $q->h2('Thank you for your submission');
+    print $q->start_html(-name => 'Thanks');
+    print $q->h2('Thank you for your submission');
 }
 
-# our stand trailer
+# our standard trailer
 #
 ($myself = $q->self_url) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 $myself =~ s/\.cgi/_cgi/;
-print "You can view the ",
-    $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code'),
-    " to this program.\n";
+print "You can view the ";
+print $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code');
+print " to this program.\n";
 print $q->hr, $q->end_html;

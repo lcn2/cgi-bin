@@ -3,6 +3,37 @@
 # cgi-example.cgi - Example #1 of a CGI perl script
 #
 # This CGI script that creates a fill-out form and echoes back its values.
+#
+# NOTE: We added newlines to each CGI print statement to make the HTML output
+#	a little easier for humans to read.  These \n's are not required.
+#
+# @(#) $Revision$
+# @(#) $Id$
+# @(#) $Source$
+#
+# Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby granted,
+# provided that the above copyright, this permission notice and text
+# this comment, and the disclaimer below appear in all of the following:
+#
+#       supporting documentation
+#       source copies
+#       source works derived from this source
+#       binaries derived from this source or from derived source
+#
+# LANDON CURT NOLL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO
+# EVENT SHALL LANDON CURT NOLL BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+# CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+# USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+# chongo (Landon Curt Noll, http://www.isthe.com/chongo/index.html) /\oo/\
+#
+# Share and enjoy! :-)
 
 # requirements
 #
@@ -19,7 +50,6 @@ $CGI::DISABLE_UPLOADS = 1;	# no uploads
 #
 my $q;		# our CGI object
 my $myself;	# this URL
-my $h;		# HTML element
 my $override=0;	# 1 ==> override current value to use defaults
 
 # setup
@@ -31,7 +61,6 @@ if (cgi_error()) {
     print "Error: ", cgi_error(), "\n";
     exit(1);
 }
-$q->use_named_parameters(1);
 
 # determine the override value
 #
@@ -39,67 +68,70 @@ if ($q->param() && defined($q->param('override'))) {
     $override = $q->param('override');
 }
 
+# start off HTML header output
+#
+print $q->header, "\n";
+print $q->start_html(-title => 'CGI Example #1',
+		     -bgcolor => '#98B8D8'), "\n";
+print $q->h1('CGI Example #1'), "\n";
+
 # print the HTML form
 #
-print $q->header;
-print $q->start_html(-title => 'CGI Example #1',
-		     -bgcolor => '#98B8D8');
-print $q->h1('CGI Example #1');
-print $q->start_form(-method => 'POST');
-print "What's your name? ";
+print $q->start_form(-method => 'POST'), "\n";
+print "What's your name? ", "\n";
 print $q->textfield(-name => 'yourname',
 		    -default => 'Your name here',
-		    -override => $override);
-print $q->p;
-print "What's the combination? ";
+		    -override => $override), "\n";
+print $q->p, "\n";
+print "What's the combination? ", "\n";
 print $q->checkbox_group(-name => 'words',
 			 -values => ['eenie','meenie','minie','moe'],
 			 -defaults => ['eenie','minie'],
-			 -override => $override);
-print $q->p;
-print "What's your favorite color? ";
+			 -override => $override), "\n";
+print $q->p, "\n";
+print "What's your favorite color? ", "\n";
 print $q->popup_menu(-name => 'color',
 		     -values => ['green','red','blue','chartreuse'],
-		     -override => $override);
-print $q->p;
-print "Use coconuts: ";
+		     -override => $override), "\n";
+print $q->p, "\n";
+print "Use coconuts: ", "\n";
 print $q->checkbox(-name => 'coconut',
 		   -checked => '',
 		   -value => 'true',
 		   -label => ' <== Coconut checkbox',
-		   -override => $override);
-print $q->p;
-print $q->submit(-name => 'Submit');
-print " ";
-print $q->reset(-name => 'Reset to last values');
-print $q->end_form;
-print $q->start_form;
+		   -override => $override), "\n";
+print $q->p, "\n";
+print $q->submit(-name => 'Submit'), "\n";
+print " ", "\n";
+print $q->reset(-name => 'Reset to last values'), "\n";
+print $q->end_form, "\n";
+print $q->start_form, "\n";
 print $q->hidden(-name => 'override',
 		 -default => '1',
-		 -override => 1);
-print $q->submit(-name => 'Restore defaults');
-print $q->end_form;
-print $q->hr;
+		 -override => 1), "\n";
+print $q->submit(-name => 'Restore defaults'), "\n";
+print $q->end_form, "\n";
+print $q->hr, "\n";
 
 # post the reply
 #
 if ($q->param() && !defined($q->param('override'))) {
-    print $q->p,
-    print "Your name is: ";
-    print $q->b($q->param('yourname'));
-    print $q->p;
-    print "The keywords are: ";
-    print $q->em(join(", ", $q->param('words')));
-    print $q->p;
-    print "Your favorite color is: ";
-    print $q->tt(param('color'));
-    print $q->p;
-    print "The coconut value (if any) is: ";
-    print $q->b('{');
-    print $q->param('coconut');
-    print $q->b('}');
-    print $q->p;
-    print $q->hr;
+    print $q->p, "\n";
+    print "Your name is: ", "\n";
+    print $q->b($q->param('yourname')), "\n";
+    print $q->p, "\n";
+    print "The keywords are: ", "\n";
+    print $q->em(join(", ", $q->param('words'))), "\n";
+    print $q->p, "\n";
+    print "Your favorite color is: ", "\n";
+    print $q->tt(param('color')), "\n";
+    print $q->p, "\n";
+    print "The coconut value (if any) is: ", "\n";
+    print $q->b('{'), "\n";
+    print $q->param('coconut'), "\n";
+    print $q->b('}'), "\n";
+    print $q->p, "\n";
+    print $q->hr, "\n";
 }
 
 # our standard trailer
@@ -108,6 +140,8 @@ if ($q->param() && !defined($q->param('override'))) {
 $myself =~ s/.*\///;
 $myself =~ s/\.cgi/_cgi/;
 print "You can view the ";
-print $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code');
+print $q->a({-href => "/chongo/tech/comp/cgi/".$myself.".txt"},
+	    'source code'), "\n";
 print " to this program.\n";
-print $q->hr, $q->end_html;
+print $q->hr, "\n";
+print $q->end_html, "\n";

@@ -1,11 +1,39 @@
-#!/usr/bin/perl -T
 #!/usr/bin/perl -wT
 #
 # cgi-example2.cgi - Example of a CGI perl script done objected oriented style
 #
 # This CGI script that creates a fill-out form and echoes back its values.
 #
-# By: chongo <Landon Curt Noll> {noll,chongo}@{toad,sgi}.com
+# NOTE: We added newlines to each CGI print statement to make the HTML output
+#	a little easier for humans to read.  These \n's are not required.
+#
+# @(#) $Revision$
+# @(#) $Id$
+# @(#) $Source$
+#
+# Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
+#
+# Permission to use, copy, modify, and distribute this software and
+# its documentation for any purpose and without fee is hereby granted,
+# provided that the above copyright, this permission notice and text
+# this comment, and the disclaimer below appear in all of the following:
+#
+#       supporting documentation
+#       source copies
+#       source works derived from this source
+#       binaries derived from this source or from derived source
+#
+# LANDON CURT NOLL DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
+# INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO
+# EVENT SHALL LANDON CURT NOLL BE LIABLE FOR ANY SPECIAL, INDIRECT OR
+# CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+# USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+#
+# chongo (Landon Curt Noll, http://www.isthe.com/chongo/index.html) /\oo/\
+#
+# Share and enjoy! :-)
 
 # requirements
 #
@@ -44,11 +72,13 @@ if (cgi_error()) {
     print "Error: ", cgi_error(), "\n";
     exit(1);
 }
-$q->use_named_parameters(1);
 
 # start off HTML header output
 #
-print $q->header;
+print $q->header, "\n";
+print $q->start_html(-title => 'CGI Example #2',
+		     -bgcolor => '#98B8D8');
+print $q->h1('CGI Example #2');
 
 # determine which action we will take
 #
@@ -89,34 +119,31 @@ if ($action eq 'default' || $action eq 'edit') {
 
     # print the HTML form for the user to play with
     #
-    print $q->start_html(-title => 'CGI Example #2',
-		         -bgcolor => '#98B8D8');
-    print $q->h1('CGI Example #2');
-    print $q->start_form;
-    print "What's your name? ";
+    print $q->start_form, "\n";
+    print "What's your name? ", "\n";
     print $q->textfield(-name => 'yourname',
-			-value => $pardef{'yourname'});
-    print $q->p;
-    print "What's the combination? ";
+			-value => $pardef{'yourname'}), "\n";
+    print $q->p, "\n";
+    print "What's the combination? ", "\n";
     print $q->checkbox_group(-name => 'words',
 			     -values => ['eenie','meenie','minie','moe'],
-			     -defaults => $pardef{'words'});
-    print $q->p;
-    print "What's your favorite color? ";
+			     -defaults => $pardef{'words'}), "\n";
+    print $q->p, "\n";
+    print "What's your favorite color? ", "\n";
     print $q->popup_menu(-name => 'color',
 			 -values => ['green','red','blue','chartreuse'],
-			 -defaults => $pardef{'color'});
-    print $q->p;
+			 -defaults => $pardef{'color'}), "\n";
+    print $q->p, "\n";
     print $q->hidden(-name => 'do_preview',
-		     -value => 'cgi-example2.cgi');
-    print $q->submit(-name => 'Preview');
-    print $q->end_form;
-    print $q->start_form;
-    print $q->submit(-name => 'Reset');
+		     -value => 'cgi-example2.cgi'), "\n";
+    print $q->submit(-name => 'Preview'), "\n";
+    print $q->end_form, "\n";
+    print $q->start_form, "\n";
+    print $q->submit(-name => 'Reset'), "\n";
     print $q->hidden(-name => 'do_default',
-		     -value => 'cgi-example2.cgi');
-    print $q->end_form;
-    print $q->hr;
+		     -value => 'cgi-example2.cgi'), "\n";
+    print $q->end_form, "\n";
+    print $q->hr, "\n";
 
 # Allow the user to preview their results with an option to edit or submit
 #
@@ -126,53 +153,53 @@ if ($action eq 'default' || $action eq 'edit') {
 
     # preview the values
     #
-    print $q->start_html(-name => 'Preview the values');
-    print $q->p;
-    print $q->h2('Please review for correctness');
-    print $q->p;
-    print "Your name is: ", $q->b($q->param('yourname'));
-    print $q->p;
-    print "The keywords are: ", $q->em(join(", ", $q->param('words')));
-    print $q->p;
-    print "Your favorite color is: ", $q->tt(param('color'));
-    print $q->p;
-    print $q->hr;
+    print $q->start_html(-name => 'Preview the values'), "\n";
+    print $q->p, "\n";
+    print $q->h2('Please review for correctness'), "\n";
+    print $q->p, "\n";
+    print "Your name is: ", $q->b($q->param('yourname')), "\n";
+    print $q->p, "\n";
+    print "The keywords are: ", $q->em(join(", ", $q->param('words'))), "\n";
+    print $q->p, "\n";
+    print "Your favorite color is: ", $q->tt(param('color')), "\n";
+    print $q->p, "\n";
+    print $q->hr, "\n";
 
     # give them a form to edit
     #
-    print $q->start_form;
+    print $q->start_form, "\n";
     print $q->hidden(-name => 'do_edit',
-		     -value => 'cgi-example2.cgi');
+		     -value => 'cgi-example2.cgi'), "\n";
     foreach $name ( @parname ) {
-	my $value = $q->param($name);
+	my $value = $q->param($name), "\n";
 	if (defined $value) {
 	    print $q->hidden(-name => $name,
-	    		     -value => $value);
+	    		     -value => $value), "\n";
 	}
     }
-    print $q->submit(-name => 'Edit');
-    print $q->end_form;
+    print $q->submit(-name => 'Edit'), "\n";
+    print $q->end_form, "\n";
 
     # give them a form to submit
     #
-    print $q->start_form;
+    print $q->start_form, "\n";
     print $q->hidden(-name => 'do_submit',
-		     -value => 'cgi-example2.cgi');
+		     -value => 'cgi-example2.cgi'), "\n";
     foreach $name ( @parname ) {
-	my $value = $q->param($name);
+	my $value = $q->param($name), "\n";
 	if (defined $value) {
 	    print $q->hidden(-name => $name,
-	    		     -value => $value);
+	    		     -value => $value), "\n";
 	}
     }
-    print $q->submit(-name => 'Submit');
-    print $q->end_form;
+    print $q->submit(-name => 'Submit'), "\n";
+    print $q->end_form, "\n";
 
 # post the reply for the submit action
 #
 } else {
-    print $q->start_html(-name => 'Thanks');
-    print $q->h2('Thank you for your submission');
+    print $q->start_html(-name => 'Thanks'), "\n";
+    print $q->h2('Thank you for your submission'), "\n";
 }
 
 # our standard trailer
@@ -180,7 +207,9 @@ if ($action eq 'default' || $action eq 'edit') {
 ($myself = $q->self_url) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 $myself =~ s/\.cgi/_cgi/;
-print "You can view the ";
-print $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code');
+print "You can view the ", "\n";
+print $q->a({-href => "/chongo/tech/comp/cgi/".$myself.".txt"},
+	    'source code'), "\n";
 print " to this program.\n";
-print $q->hr, $q->end_html;
+print $q->hr, "\n";
+print $q->end_html, "\n";

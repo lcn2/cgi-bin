@@ -1,19 +1,26 @@
-#!/bin/sh
+#!/usr/bin/perl -wT
 # @(#)html.cgi	1.4 10 Oct 1995 03:31:37
 #
 # html.cgi - an example of an CGI returning HTML
 
+# setup
+#
+use strict;
+require 5.003;
+select(STDOUT);
+$| = 1;
+
 # we must first send our MIME type
 #
-echo Content-type: text/html
+print "Content-type: text/html\n";
 
 # we must next send a URL for another document, or an empty line
 #
-echo
+print "\n";
 
 # return the HTML document
 #
-cat <<END_OF_FILE
+print <<END_OF_FILE;
 <HTML>
 <HEAD>
 <TITLE> HTML returned by html.cgi </TITLE>
@@ -36,10 +43,11 @@ example.
 
 <ADDRESS>
 Landon Curt Noll 
-(<A HREF="//prime.csd.sgi.com/chongo.html">chongo@sgi.com</a>)<br>
+(<A HREF="//prime.csd.sgi.com/chongo.html">chongo\@sgi.com</a>)<br>
 <A HREF="//prime.csd.sgi.com/cjew.html">chongo</a> &lt; was here &gt;
 <A HREF="//prime.csd.sgi.com/faq/bat.html"><strong>/\oo/\</strong></a>
 </ADDRESS>
 </BODY>
 </HTML>
 END_OF_FILE
+exit(0);

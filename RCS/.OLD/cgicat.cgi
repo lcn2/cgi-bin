@@ -83,14 +83,14 @@ The following are some cgi-bin scripts that you can view:
 <P></P>
 
 <UL>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/hitcount.cgi.cat">
-hitcount.cgi</A> (maintain and display page usage count)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi.cat">
 html.cgi</A> (an example of an CGI returning HTML)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi.cat">
 test.cgi</A> (test server for CGI/1.1 conformance)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/versions-b.cgi.cat">
 versions-b.cgi</A> (display versions -b output)<BR>
+<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/showprods-3EFn.cgi.cat">
+showprods-3EFn.cgi</A> (display showprods -3EFn output)<BR>
 </UL>
 
 and here is where you can run them:
@@ -98,14 +98,14 @@ and here is where you can run them:
 <P></P>
 
 <UL>
-<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/hitcount.cgi?hitcount+o">
-hitcount.cgi</A> (maintain and display page usage count)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/html.cgi">
 html.cgi</A> (an example of an CGI returning HTML)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/test.cgi">
 test.cgi</A> (test server for CGI/1.1 conformance)<BR>
 <DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/versions-b.cgi">
 versions-b.cgi</A> (display versions -b output)<BR>
+<DD><LI><A HREF="http://prime.csd.sgi.com/cgi-bin/showprods-3EFn.cgi">
+showprods-3EFn.cgi</A> (display showprods -3EFn output)<BR>
 </UL>
 
 <HR>

@@ -15,7 +15,7 @@ use strict;
 close(STDIN);
 select(STDOUT);
 $| = 1;
-$SIG{ALRM} = sub { print "content-type: text/html\n\n" .
+$SIG{ALRM} = sub { print "Content-type: text/html\n\n" .
 			 "HTML><HEAD><TITLE>timeout<//TITLE></HEAD><BODY> " .
 			 "time limit </BODY></HTML>\n"; exit(1); };
 alarm(5);
@@ -30,7 +30,7 @@ my $content;		# $html content
 $html = "/err/index.html";
 $html = "/web/isthe/chroot/index.html";    #-# real location
 open(HTML, "<$html") ||
-  die "content-type: text/html\n\n" .
+  die "Content-type: text/html\n\n" .
       "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
       "cannot open $html </BODY></HTML>\n";
 
@@ -39,14 +39,14 @@ open(HTML, "<$html") ||
 undef $/;
 $content = <HTML>;
 if (! defined $content) {
-  die "content-type: text/html\n\n" .
+  die "Content-type: text/html\n\n" .
       "<HTML><HEAD><TITLE>read error</TITLE></HEAD><BODY> " .
       "cannot read $html </BODY></HTML>\n";
 }
 
 # write the entire file - ignore write errors
 #
-print "content-type: text/html\n\n";
+print "Content-type: text/html\n\n";
 print "$content";
 
 # all done

@@ -1,14 +1,13 @@
 #!/usr/bin/perl -wT
 # @(#)cgicat	1.1 10 Oct 1995 03:23:08
 #
-# cgicat.alt - cat a cgi-bin script in html form from the .alt file
+# cgicat.alt.cgi - cat a cgi-bin script in html form from the .alt file
 #
 # usage:
-#	cgi_filename.cat
+#	cat.filename.cgi
 #
-#	Cat the file cgi_filename so that the reader does not interpret
-#	the usual html magic characters.  The basename (minus the .cat)
-#	is the file to print.
+#	Cat the file filename.cgi.alt so that the reader does not interpret
+#	the usual html magic characters.
 
 # setup
 #
@@ -26,8 +25,7 @@ my $line;
 #
 $argv0 = $0;
 $argv0 =~ s/^.*\///o;
-$argv0 =~ s/\.cat$//o;
-$argv0 =~ s/\.txt$//o;
+$argv0 =~ s/^cat\.//o;
 if ($argv0 =~ /^([-\@\w.]+)$/) {
     $argv0 = $1;
 } else {
@@ -36,7 +34,7 @@ if ($argv0 =~ /^([-\@\w.]+)$/) {
 
 # open the base file
 #
-open(CGIFILE, "<$argv0.alt") || die "cannot open $argv0.alt\n";
+open(CGIFILE, "<cgi-bin/$argv0.alt") || die "cannot open $argv0.alt\n";
 
 # special code to explain how to use cgicat
 #

@@ -24,7 +24,7 @@ my $line;
 
 # obtain the basename of the arg without any .cat
 #
-$argv0 = $ARGV[0];
+$argv0 = $0;
 $argv0 =~ s/^.*\///o;
 $argv0 =~ s/\.cat$//o;
 if ($argv0 =~ /^([-\@\w.]+)$/) {

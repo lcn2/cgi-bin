@@ -6,7 +6,6 @@
 # setup
 #
 use strict;
-require 5.003;
 select(STDOUT);
 $| = 1;
 

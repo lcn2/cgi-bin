@@ -173,6 +173,7 @@ if ($action eq 'default' || $action eq 'edit') {
 #
 ($myself = $q->self_url) =~ s/\?.*$//;
 $myself =~ s/.*\///;
+$myself =~ s/\.cgi/_cgi/;
 print "You can view the ",
     $q->a({'href' => "/chongo/tech/comp/cgi/".$myself.".txt"}, 'source code'),
     " to this program.\n";

@@ -58,6 +58,8 @@ my $timeout = 6;
 #
 $q = new CGI;
 $q->use_named_parameters(1);
+($myself = $q->self_url) =~ s/\?.*$//;
+$myself =~ s/.*\///;
 
 # If we did not come from the right URL, bounce them back
 # to where they should have come from in the first place.
@@ -74,24 +76,22 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referer_url\E/) {
 			'text' => '#FFFFFF'),
 	$q->h2('Access Denied'),
 	"\nSorry, you may only access the\n",
-	$q->a({'href' => $q->self_url}, 'forced referer demo'),
+	$q->b("forced referer CGI"),
 	"\nvia the URLs that contain the string:\n",
 	$q->blockquote($q->b($referer_url)),
-	"\nsuch as CGI demo page:\n",
-	$q->blockquote($q->b($q->a({'href' => $bounce_url},
-				   'forced referer demo'))),
 	"\nYour previous URL:\n",
 	$q->blockquote($q->b($q->a({'href' => $ENV{'HTTP_REFERER'}},
 				   $ENV{'HTTP_REFERER'}))),
 	"\ndid not contain that string.\n",
 	$q->p,
-	"\nIn $timeout seconds, you will be moved to the ",
+	"\nIf your browser supports it, in $timeout seconds, you will\n",
+	"be moved to the ",
 	$q->b($q->a({'href' => $bounce_url}, 'forced referer demo')),
 	"\npage or you may click on that link to go there now.\n",
 	$q->p,
 	"\nFYI: The\n",
-	$q->a({'href' => $q->self_url . ".txt"}, 'source'),
-	"\nfor this CGI demo script is available.\n",
+	$q->a({'href' => "${referer_url}${myself}.txt"}, 'source'),
+	"\nfor this CGI is available.\n",
 	$q->p,
 	$q->end_html;
      exit(1);
@@ -111,13 +111,13 @@ print $q->header,
 		         $ENV{'HTTP_REFERER'})),
     "\ncontained the string:\n",
     $q->blockquote($q->b($referer_url)),
-    "\nand so you were allowed access to\n",
-    $q->a({'href' => $q->self_url}, 'this URL'),
+    "\nand so you were allowed to access the\n",
+    $q->b("forced referer CGI"),
     ".\n",
     $q->p,
     "\nFYI: The\n",
-    $q->a({'href' => $q->self_url . ".txt"}, 'source'),
-    "\nfor this CGI demo script is available.\n",
+    $q->a({'href' => "${referer_url}${myself}.txt"}, 'source'),
+    "\nfor this CGI is available.\n",
     $q->p,
     $q->end_html;
 exit(0);

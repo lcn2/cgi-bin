@@ -1,6 +1,7 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -T
+#!/usr/bin/perl -wT
 #
-# cgi-example.cgi - Example of a CGI perl script done objected oriented style
+# cgi-example2.cgi - Example of a CGI perl script done objected oriented style
 #
 # This CGI script that creates a fill-out form and echoes back its values.
 #

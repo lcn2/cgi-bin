@@ -5,8 +5,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.3 $
-# @(#) $Id: cookie.cgi,v 1.3 2004/03/25 07:38:51 chongo Exp chongo $
+# @(#) $Revision: 1.4 $
+# @(#) $Id: cookie.cgi,v 1.4 2005/05/09 17:28:59 chongo Exp chongo $
 # @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cookie.cgi,v $
 #
 # Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
@@ -36,6 +36,8 @@
 # requirements
 #
 use CGI qw(:standard);
+use HTML::Entities;	# prevent cross site scripting
+sub xss($);		# prevent cross site scripting
 use CGI::Cookie;
 use CGI::Carp qw(fatalsToBrowser warningsToBrowser set_message);
 set_message("This error came from a CGI program");
@@ -60,7 +62,8 @@ my $cookie;	# individual cookie
 # setup
 #
 $q = new CGI;
-$myself = $q->self_url;
+# prevent cross site scripting
+$myself = xss($q->self_url);
 if (defined $myself) {
     set_message("This error came from $myself");
 }
@@ -86,10 +89,10 @@ if (defined $q->param('name') && defined $q->param('value')) {
 
     # form a brand new cookie based on the current fields
     #
-    $cookie = new CGI::Cookie(-name => $q->param('name'),
-    			       -value => $q->param('value'));
-    $cookie->domain($q->param('domain')) if defined $q->param('domain');
-    $cookie->path($q->param('path')) if defined $q->param('path');
+    $cookie = new CGI::Cookie(-name => xss($q->param('name')),
+    			       -value => xss($q->param('value')));
+    $cookie->domain(xss($q->param('domain'))) if defined $q->param('domain');
+    $cookie->path(xss($q->param('path'))) if defined $q->param('path');
 
     # add/change the cookie set with the new cookie
     #
@@ -103,6 +106,8 @@ foreach (keys %cookies) {
     $cookie_set .= ";" if (length($cookie_set) > 0);
     $cookie_set .= $cookies{$_}->as_string;
 }
+# prevent cross site scripting
+$cookie_set = xss($cookie_set);
 
 # start off HTML header output
 #
@@ -120,7 +125,8 @@ print $q->h1('HTTP Cookies'), "\n";
 #
 print $q->h2('Your browser sent our server these cookies');
 foreach (keys %early_cookies) {
-    print $early_cookies{$_}->as_string;
+    # prevent cross site scripting
+    print xss($early_cookies{$_}->as_string);
     print $q->br, "\n";
 }
 print $q->hr, "\n";
@@ -161,7 +167,8 @@ print $q->hr, "\n";
 #
 print $q->h2('Cookies sent to your browser after Submit is pressed');
 foreach (keys %cookies) {
-    print $cookies{$_}->as_string;
+    # prevent cross site scripting
+    print xss($cookies{$_}->as_string);
     print $q->br, "\n";
 }
 print $q->hr, "\n";
@@ -196,3 +203,35 @@ print $q->end_html, "\n";
 # All done!! -- Jessica Noll (Age: 2)
 #
 exit(0);
+
+
+# xss - remove or encode cross site scripting chars and non-printable chars
+#
+# given:
+#	$string		string to strip and encode or undef
+#
+# returns:
+#	a safer string or undef
+#
+sub xss($)
+{
+    my $string = $_[0];		# get arg
+
+    # firewall - undef returns undef
+    #
+    if (! defined $string) {
+	return undef;
+    }
+
+    # paranoia - remove % & to avoid substitution recursion
+    #
+    $string =~ s/[%&]+//g;
+
+    # encode anything else unsafe
+    #
+    $string = HTML::Entities::encode($string, "\000-\037\%\&\<\>\"\177-\377");
+
+    # return the safe string
+    #
+    return $string;
+}

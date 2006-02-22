@@ -29,6 +29,7 @@
 # requirements
 #
 use CGI qw(:standard);
+use HTML::Entities;	# prevent cross site scripting
 use strict;
 
 # For DOS (Denial Of Service) protection prevent file uploads and
@@ -61,7 +62,8 @@ if (cgi_error()) {
     print "Error: ", cgi_error(), "\n";
     exit(1);
 }
-($myself = $q->self_url) =~ s/\?.*$//;
+# prevent cross site scripting
+($myself = xss($q->self_url)) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 $mysrc = "${referrer_url}${myself}.txt";
 $mysrc =~ s/\.cgi/_cgi/;
@@ -70,8 +72,10 @@ $mysrc =~ s/\.cgi/_cgi/;
 # to where they should have come from in the first place.
 #
 if (!defined($ENV{'HTTP_REFERER'})) {
-    $ENV{'HTTP_REFERER'} = ' << NO HTTP_REFERER FOUND >> ';
+    $ENV{'HTTP_REFERER'} = ' (( NO HTTP_REFERER FOUND )) ';
 }
+# prevent cross site scripting
+$ENV{'HTTP_REFERER'} = xss($ENV{'HTTP_REFERER'});
 if ($ENV{'HTTP_REFERER'} !~ /\Q$referrer_url\E/) {
     print $q->header(-refresh => "$timeout; url=$bounce_url");
     print $q->start_html(-title => 'Forced Referer demo',
@@ -133,4 +137,39 @@ print $q->p;
 print "\nGo ";
 print $q->a({-href => "${bounce_url}"}, 'back'), ".\n";
 print $q->end_html;
+
+# All done!!! - Jessica Noll, Age 2
+#
 exit(0);
+
+
+# xss - remove or encode cross site scripting chars and non-printable chars
+#
+# given:
+#	$string		string to strip and encode or undef
+#
+# returns:
+#	a safer string or undef
+#
+sub xss($)
+{
+    my $string = $_[0];		# get arg
+
+    # firewall - undef returns undef
+    #
+    if (! defined $string) {
+	return undef;
+    }
+
+    # paranoia - remove % & to avoid substitution recursion
+    #
+    $string =~ s/[%&]+//g;
+
+    # encode anything else unsafe
+    #
+    $string = HTML::Entities::encode($string, "\000-\037\%\&\<\>\"\177-\377");
+
+    # return the safe string
+    #
+    return $string;
+}

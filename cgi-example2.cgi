@@ -7,8 +7,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.14 $
-# @(#) $Id: cgi-example2.cgi,v 1.14 2003/03/02 00:33:22 chongo Exp chongo $
+# @(#) $Revision: 1.15 $
+# @(#) $Id: cgi-example2.cgi,v 1.15 2005/05/09 17:28:59 chongo Exp chongo $
 # @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cgi-example2.cgi,v $
 #
 # Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
@@ -38,6 +38,8 @@
 # requirements
 #
 use CGI qw(:standard);
+use HTML::Entities;	# prevent cross site scripting
+sub xss($);		# prevent cross site scripting
 use strict;
 
 # For DOS (Denial Of Service) protection prevent file uploads and
@@ -106,7 +108,12 @@ if (defined($q->param('do_default'))) {
 if ($q->param() && $action ne 'default') {
     foreach $name ( @parname ) {
 	if (defined($q->param($name))) {
-	    $pardef{$name} = $q->param($name);
+	    if (defined($pardef{$name})) {
+		# prevent cross site scripting
+		$pardef{$name} = xss($pardef{$name});
+	    } else {
+		$pardef{$name} = undef;
+	    }
 	}
     }
 }
@@ -157,11 +164,17 @@ if ($action eq 'default' || $action eq 'edit') {
     print $q->p, "\n";
     print $q->h2('Please review for correctness'), "\n";
     print $q->p, "\n";
-    print "Your name is: ", $q->b($q->param('yourname')), "\n";
+    # prevent cross site scripting
+    print "Your name is: ",
+      $q->b(xss($q->param('yourname'))), "\n";
     print $q->p, "\n";
-    print "The keywords are: ", $q->em(join(", ", $q->param('words'))), "\n";
+    # prevent cross site scripting
+    print "The keywords are: ",
+        $q->em(xss(join(", ", $q->param('words')))), "\n";
     print $q->p, "\n";
-    print "Your favorite color is: ", $q->tt(param('color')), "\n";
+    # prevent cross site scripting
+    print "Your favorite color is: ",
+        $q->tt(xss(param('color'))), "\n";
     print $q->p, "\n";
     print $q->hr, "\n";
 
@@ -173,8 +186,9 @@ if ($action eq 'default' || $action eq 'edit') {
     foreach $name ( @parname ) {
 	my $value = $q->param($name);
 	if (defined $value) {
-	    print $q->hidden(-name => $name,
-	    		     -value => $value), "\n";
+	    # prevent cross site scripting
+	    print $q->hidden(-name => xss($name),
+	    		     -value => xss($value)), "\n";
 	}
     }
     print $q->submit(-name => 'Edit'), "\n";
@@ -188,8 +202,9 @@ if ($action eq 'default' || $action eq 'edit') {
     foreach $name ( @parname ) {
 	my $value = $q->param($name);
 	if (defined $value) {
-	    print $q->hidden(-name => $name,
-	    		     -value => $value), "\n";
+	    # prevent cross site scripting
+	    print $q->hidden(-name => xss($name),
+	    		     -value => xss($value)), "\n";
 	}
     }
     print $q->submit(-name => 'Submit'), "\n";
@@ -204,7 +219,8 @@ if ($action eq 'default' || $action eq 'edit') {
 
 # our standard trailer
 #
-($myself = $q->self_url) =~ s/\?.*$//;
+# prevent cross site scripting
+($myself = xss($q->self_url)) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 $myself =~ s/\.cgi/_cgi/;
 print "You can view the ", "\n";
@@ -213,3 +229,39 @@ print $q->a({-href => "/chongo/tech/comp/cgi/".$myself.".txt"},
 print " to this program.\n";
 print $q->hr, "\n";
 print $q->end_html, "\n";
+
+# All done!!! - Jessica Noll, Age 2
+#
+exit(0);
+
+
+# xss - remove or encode cross site scripting chars and non-printable chars
+#
+# given:
+#	$string		string to strip and encode or undef
+#
+# returns:
+#	a safer string or undef
+#
+sub xss($)
+{
+    my $string = $_[0];		# get arg
+
+    # firewall - undef returns undef
+    #
+    if (! defined $string) {
+	return undef;
+    }
+
+    # paranoia - remove % & to avoid substitution recursion
+    #
+    $string =~ s/[%&]+//g;
+
+    # encode anything else unsafe
+    #
+    $string = HTML::Entities::encode($string, "\000-\037\%\&\<\>\"\177-\377");
+
+    # return the safe string
+    #
+    return $string;
+}

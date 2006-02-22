@@ -7,8 +7,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.13 $
-# @(#) $Id: cgi-example.cgi,v 1.13 2002/03/14 20:09:54 chongo Exp chongo $
+# @(#) $Revision: 1.14 $
+# @(#) $Id: cgi-example.cgi,v 1.14 2005/05/09 17:28:59 chongo Exp chongo $
 # @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cgi-example.cgi,v $
 #
 # Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
@@ -38,6 +38,8 @@
 # requirements
 #
 use CGI qw(:standard);
+use HTML::Entities;	# prevent cross site scripting
+sub xss($);		# prevent cross site scripting
 use strict;
 
 # For DOS (Denial Of Service) protection prevent file uploads and
@@ -65,7 +67,8 @@ if (cgi_error()) {
 # determine the override value
 #
 if ($q->param() && defined($q->param('override'))) {
-    $override = $q->param('override');
+    # prevent cross site scripting
+    $override = xss($q->param('override'));
 }
 
 # start off HTML header output
@@ -118,17 +121,21 @@ print $q->hr, "\n";
 if ($q->param() && !defined($q->param('override'))) {
     print $q->p, "\n";
     print "Your name is: ", "\n";
-    print $q->b($q->param('yourname')), "\n";
+    # prevent cross site scripting
+    print $q->b(xss($q->param('yourname'))), "\n";
     print $q->p, "\n";
     print "The keywords are: ", "\n";
-    print $q->em(join(", ", $q->param('words'))), "\n";
+    # prevent cross site scripting
+    print $q->em(xss(join(", ", $q->param('words')))), "\n";
     print $q->p, "\n";
     print "Your favorite color is: ", "\n";
-    print $q->tt(param('color')), "\n";
+    # prevent cross site scripting
+    print $q->tt(xss(param('color'))), "\n";
     print $q->p, "\n";
     print "The coconut value (if any) is: ", "\n";
     print $q->b('{'), "\n";
-    print $q->param('coconut'), "\n";
+    # prevent cross site scripting
+    print xss($q->param('coconut')), "\n";
     print $q->b('}'), "\n";
     print $q->p, "\n";
     print $q->hr, "\n";
@@ -136,7 +143,8 @@ if ($q->param() && !defined($q->param('override'))) {
 
 # our standard trailer
 #
-($myself = $q->self_url) =~ s/\?.*$//;
+# prevent cross site scripting
+($myself = xss($q->self_url)) =~ s/\?.*$//;
 $myself =~ s/.*\///;
 $myself =~ s/\.cgi/_cgi/;
 print "You can view the ";
@@ -145,3 +153,39 @@ print $q->a({-href => "/chongo/tech/comp/cgi/".$myself.".txt"},
 print " to this program.\n";
 print $q->hr, "\n";
 print $q->end_html, "\n";
+
+# All done!!! - Jessica Noll, Age 2
+#
+exit(0);
+
+
+# xss - remove or encode cross site scripting chars and non-printable chars
+#
+# given:
+#	$string		string to strip and encode or undef
+#
+# returns:
+#	a safer string or undef
+#
+sub xss($)
+{
+    my $string = $_[0];		# get arg
+
+    # firewall - undef returns undef
+    #
+    if (! defined $string) {
+	return undef;
+    }
+
+    # paranoia - remove % & to avoid substitution recursion
+    #
+    $string =~ s/[%&]+//g;
+
+    # encode anything else unsafe
+    #
+    $string = HTML::Entities::encode($string, "\000-\037\%\&\<\>\"\177-\377");
+
+    # return the safe string
+    #
+    return $string;
+}

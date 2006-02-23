@@ -5,8 +5,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.4 $
-# @(#) $Id: cookie.cgi,v 1.4 2005/05/09 17:28:59 chongo Exp chongo $
+# @(#) $Revision: 1.5 $
+# @(#) $Id: cookie.cgi,v 1.5 2006/02/22 02:54:38 chongo Exp chongo $
 # @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cookie.cgi,v $
 #
 # Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
@@ -46,7 +46,7 @@ use strict;
 # For DOS (Denial Of Service) protection prevent file uploads and
 # really big "POSTS"
 #
-$CGI::POST_MAX = 4096;		# max post size
+$CGI::POST_MAX = 8192;		# max post size
 $CGI::DISABLE_UPLOADS = 1;	# no uploads
 
 # my vars

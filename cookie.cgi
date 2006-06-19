@@ -5,8 +5,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.5 $
-# @(#) $Id: cookie.cgi,v 1.5 2006/02/22 02:54:38 chongo Exp chongo $
+# @(#) $Revision: 1.6 $
+# @(#) $Id: cookie.cgi,v 1.6 2006/02/23 01:31:53 chongo Exp chongo $
 # @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cookie.cgi,v $
 #
 # Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
@@ -211,7 +211,7 @@ exit(0);
 #	$string		string to strip and encode or undef
 #
 # returns:
-#	a safer string or undef
+#	a safer string or an empty string if string was undef
 #
 sub xss($)
 {
@@ -220,7 +220,7 @@ sub xss($)
     # firewall - undef returns undef
     #
     if (! defined $string) {
-	return undef;
+	return "";
     }
 
     # paranoia - remove % & to avoid substitution recursion

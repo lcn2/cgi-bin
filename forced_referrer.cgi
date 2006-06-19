@@ -149,7 +149,7 @@ exit(0);
 #	$string		string to strip and encode or undef
 #
 # returns:
-#	a safer string or undef
+#	a safer string or an empty string if string was undef
 #
 sub xss($)
 {
@@ -158,7 +158,7 @@ sub xss($)
     # firewall - undef returns undef
     #
     if (! defined $string) {
-	return undef;
+	return "";
     }
 
     # paranoia - remove % & to avoid substitution recursion

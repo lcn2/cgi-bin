@@ -17,7 +17,7 @@ use strict;
 # For DOS (Denial Of Service) protection prevent file uploads and
 # really big "POSTS"
 #
-$CGI::POST_MAX = 8192;		# max post size
+$CGI::POST_MAX = 32768;		# max post size
 $CGI::DISABLE_UPLOADS = 1;	# no uploads
 
 # my vars

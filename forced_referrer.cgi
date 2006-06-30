@@ -4,6 +4,9 @@
 #
 # Copyright (c) 1999-2002 by Landon Curt Noll.  All Rights Reserved.
 #
+# @(#) $Revision: 1.17 $
+# @(#) $Id: cgi-example.cgi,v 1.17 2006/06/27 15:59:21 root Exp root $
+#
 # Permission to use, copy, modify, and distribute this software and
 # its documentation for any purpose and without fee is hereby granted,
 # provided that the above copyright, this permission notice and text

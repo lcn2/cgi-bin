@@ -3,6 +3,9 @@
 #
 # html.cgi - an example of an CGI returning HTML
 #
+# @(#) $Revision: 1.17 $
+# @(#) $Id: cgi-example.cgi,v 1.17 2006/06/27 15:59:21 root Exp root $
+#
 # NOTE: This does things the hard way, but it works.
 #	See the Perl CGI examples for a better method.
 

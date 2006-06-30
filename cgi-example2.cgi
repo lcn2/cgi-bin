@@ -7,9 +7,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.18 $
-# @(#) $Id: cgi-example2.cgi,v 1.18 2006/06/19 11:31:04 chongo Exp root $
-# @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cgi-example2.cgi,v $
+# @(#) $Revision: 1.19 $
+# @(#) $Id: cgi-example2.cgi,v 1.19 2006/06/27 15:59:21 root Exp root $
 #
 # Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
 #

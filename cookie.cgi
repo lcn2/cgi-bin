@@ -5,9 +5,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.7 $
-# @(#) $Id: cookie.cgi,v 1.7 2006/06/19 11:31:04 chongo Exp root $
-# @(#) $Source: /web/isthe/chroot/cgi-bin/RCS/cookie.cgi,v $
+# @(#) $Revision: 1.8 $
+# @(#) $Id: cookie.cgi,v 1.8 2006/06/27 15:59:21 root Exp root $
 #
 # Copyright (c) 2002 by Landon Curt Noll.  All Rights Reserved.
 #

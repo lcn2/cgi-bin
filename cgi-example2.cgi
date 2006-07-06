@@ -7,8 +7,8 @@
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.
 #
-# @(#) $Revision: 1.19 $
-# @(#) $Id: cgi-example2.cgi,v 1.19 2006/06/27 15:59:21 root Exp root $
+# @(#) $Revision: 1.20 $
+# @(#) $Id: cgi-example2.cgi,v 1.20 2006/06/30 08:40:14 root Exp root $
 #
 # Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
 #
@@ -239,7 +239,6 @@ exit(0);
 # given:
 #	$string		string to strip and encode or undef
 #
-# returns:
 #	a safer string or an empty string if string was undef
 #
 sub xss($)

@@ -4,8 +4,8 @@
 #
 # Copyright (c) 1999-2002 by Landon Curt Noll.  All Rights Reserved.
 #
-# @(#) $Revision: 1.19 $
-# @(#) $Id: forced_referrer.cgi,v 1.19 2006/06/30 08:40:14 root Exp root $
+# @(#) $Revision: 1.20 $
+# @(#) $Id: forced_referrer.cgi,v 1.20 2006/07/06 06:10:01 root Exp root $
 #
 # Permission to use, copy, modify, and distribute this software and
 # its documentation for any purpose and without fee is hereby granted,
@@ -33,6 +33,7 @@
 #
 use CGI qw(:standard);
 use HTML::Entities;	# prevent cross site scripting
+sub xss($);		# prevent cross site scripting
 use strict;
 
 # For DOS (Denial Of Service) protection prevent file uploads and

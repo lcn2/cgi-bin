@@ -4,8 +4,8 @@
 #
 # Copyright (c) 1999-2002 by Landon Curt Noll.  All Rights Reserved.
 #
-# @(#) $Revision: 1.17 $
-# @(#) $Id: cgi-example.cgi,v 1.17 2006/06/27 15:59:21 root Exp root $
+# @(#) $Revision: 1.19 $
+# @(#) $Id: forced_referrer.cgi,v 1.19 2006/06/30 08:40:14 root Exp root $
 #
 # Permission to use, copy, modify, and distribute this software and
 # its documentation for any purpose and without fee is hereby granted,
@@ -82,7 +82,7 @@ $ENV{'HTTP_REFERER'} = xss($ENV{'HTTP_REFERER'});
 if ($ENV{'HTTP_REFERER'} !~ /\Q$referrer_url\E/) {
     print $q->header(-refresh => "$timeout; url=$bounce_url");
     print $q->start_html(-title => 'Forced Referer demo',
-			 -bgcolor => '000000',
+			 -bgcolor => '#000000',
 			 -link => '#FF0000',
 			 -vlink => '#FFF000',
 			 -text => '#FFFFFF');
@@ -90,7 +90,6 @@ if ($ENV{'HTTP_REFERER'} !~ /\Q$referrer_url\E/) {
     print "\nSorry, you may only access the\n";
     print $q->b("forced referrer CGI");
     print "\nvia the URLs that contain the string:\n";
-    print $q->br;
     print $q->br;
     print $q->blockquote($q->b($referrer_url));
     print $q->p;
@@ -120,7 +119,6 @@ print $q->start_html(-title => 'Forced Referer demo',
 		     -bgcolor => '#98B8D8');
 print $q->h2('Success');
 print "\nBecause your previous URL:\n";
-print $q->br;
 print $q->br;
 print $q->blockquote($q->a({-href => $ENV{'HTTP_REFERER'}},
 		     $ENV{'HTTP_REFERER'}));

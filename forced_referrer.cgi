@@ -4,8 +4,8 @@
 #
 # Copyright (c) 1999-2002 by Landon Curt Noll.  All Rights Reserved.
 #
-# @(#) $Revision: 1.20 $
-# @(#) $Id: forced_referrer.cgi,v 1.20 2006/07/06 06:10:01 root Exp root $
+# @(#) $Revision: 1.21 $
+# @(#) $Id: forced_referrer.cgi,v 1.21 2006/07/06 06:16:07 root Exp $
 #
 # Permission to use, copy, modify, and distribute this software and
 # its documentation for any purpose and without fee is hereby granted,

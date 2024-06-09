@@ -2,8 +2,8 @@
 #
 # cgi-example.cgi - Simple CGI Example #0
 #
-# @(#) $Revision: 1.17 $
-# @(#) $Id: cgi-example.cgi,v 1.17 2006/06/27 15:59:21 root Exp root $
+# @(#) $Revision: 1.6 $
+# @(#) $Id: cgi-simple.cgi,v 1.6 2006/06/30 08:40:14 root Exp $
 #
 # NOTE: We added newlines to each CGI print statement to make the HTML output
 #	a little easier for humans to read.  These \n's are not required.

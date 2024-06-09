@@ -2,8 +2,8 @@
 #
 # nothing.cgi - CGI to redirect user to another page
 #
-# @(#) $Revision: 1.17 $
-# @(#) $Id: cgi-example.cgi,v 1.17 2006/06/27 15:59:21 root Exp root $
+# @(#) $Revision: 1.5 $
+# @(#) $Id: nothing.cgi,v 1.5 2006/06/30 08:40:14 root Exp $
 #
 # usage:
 #	nothing.cgi

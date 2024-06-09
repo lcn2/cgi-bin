@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 #
-# cgi-bin - install cgi-bin tools into the cgi-bin dir and our web tree if either exist
+# cgi-bin - CGI demonstration code
 
 # Makefile tool environment
 #

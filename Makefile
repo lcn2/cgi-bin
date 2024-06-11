@@ -63,8 +63,7 @@ WHOAMI_DIR= ../whoami
 # 	We only use whoami.cgi in $(TECH_COMP_CGI} because we want
 # 	to install the file into our web source page.
 #
-CGI= cgi-example.cgi cgi-example2.cgi cgi-simple.cgi \
-	forced_referrer.cgi html.cgi cookie.cgi nothing.cgi
+CGI= cgi-example.cgi cgi-simple.cgi html.cgi nothing.cgi
 ALT_CGI= whoami.cgi
 ALT_SRC= whoami.cgi.alt
 #
@@ -78,14 +77,10 @@ SPECIAL_CGI= number.cgi index.html
 #
 # TECH_COMP_CGI_DIR - location of www.isthe.com/chongo/tech/comp/cgi/
 # TECH_COMP_CGI - files to be exported to ${TECH_COMP_CGI_DIR}
-# TECH_COMP_CGI_REFERRER_DIR - www.isthe.com//chongo/tech/comp/cgi/referrer loc
-# TECH_COMP_CGI_REFERRER - files to be exported to ${TECH_COMP_CGI_REFERRER_DIR}
 #
 TECH_COMP_CGI_DIR= ${DOCROOT}/chongo/tech/comp/cgi
-TECH_COMP_CGI= html.cgi cgi-example.cgi cgi-example2.cgi cgi-simple.cgi \
-		cookie.cgi ${ALT_CGI}
-TECH_COMP_CGI_REFERRER_DIR= ${DOCROOT}/chongo/tech/comp/cgi/referrer
-TECH_COMP_CGI_REFERRER= forced_referrer.cgi
+TECH_COMP_CGI= html.cgi cgi-example.cgi cgi-simple.cgi \
+		${ALT_CGI}
 
 # targets - that can be removed
 #
@@ -146,7 +141,7 @@ update:
 
 # exported - export cgi scripts into .txt files for html use
 #
-exported: ${TECH_COMP_CGI} ${TECH_COMP_CGI_REFERRER}
+exported: ${TECH_COMP_CGI}
 
 clean:
 
@@ -172,21 +167,6 @@ install: all
 		    ${CHMOD} 0444 ${TECH_COMP_CGI_DIR}/$$j.txt.new; \
 		    echo "	${MV} -f ${TECH_COMP_CGI_DIR}/$$j.txt.new ${TECH_COMP_CGI_DIR}/$$j.txt"; \
 		    ${MV} -f ${TECH_COMP_CGI_DIR}/$$j.txt.new ${TECH_COMP_CGI_DIR}/$$j.txt; \
-		fi; \
-	    done; \
-	    for i in ${TECH_COMP_CGI_REFERRER}; do \
-		j="`echo $$i | ${SED} -e 's/\.cgi/_cgi/'`"; \
-		if cmp -s $$i ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt; then \
-		    :; \
-		else \
-		    echo "	${CP} $$i ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new"; \
-		    ${CP} -f $$i ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new; \
-		    echo "	${CHOWN} ${HTML_USER}:${HTML_GROUP} ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new"; \
-		    ${CHOWN} ${HTML_USER}:${HTML_GROUP} ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new; \
-		    echo "	${CHMOD} 0444 ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new"; \
-		    ${CHMOD} 0444 ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new; \
-		    echo "	${MV} -f ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt"; \
-		    ${MV} -f ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt.new ${TECH_COMP_CGI_REFERRER_DIR}/$$j.txt; \
 		fi; \
 	    done; \
 	else \

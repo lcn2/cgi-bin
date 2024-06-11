@@ -4,13 +4,35 @@
 #
 # This CGI script that creates a fill-out form and echoes back its values.
 #
-# NOTE: We added newlines to each CGI print statement to make the HTML output
-#	a little easier for humans to read.  These \n's are not required.
+# If when you run this tool you see an error of the form:
 #
-# @(#) $Revision: 1.19 $
-# @(#) $Id: cgi-example.cgi,v 1.19 2006/07/06 01:50:41 root Exp $
+#	Can't locate __something__ in @INC (you may need to install the __something__ module) ...
+#	Undefined subroutine &__something__ called at ...
 #
-# Copyright (c) 1998-2002 by Landon Curt Noll.  All Rights Reserved.
+# Run, as root:
+#
+#	cpanm CGI::Tiny Text::Xslate Data::Section::Simple HTML::Entities
+#
+# or if you do not have the cpanm tool:
+#
+#	cpan CGI::Tiny Text::Xslate Data::Section::Simple HTML::Entities
+#
+# If needed, adjust the path from the line to be the directory under where the file,
+# CGI/Tiny/Multipart.pm is found:
+#
+#	use lib "/usr/local/perl/perl5/lib/perl5";
+#
+# You may have to add this directive to your apache configuration:
+#
+#	<IfModule mod_env>
+#
+#	    # The directory where CGI/Tiny/Multipart.pm is found
+#	    #
+#	    SetEnv PERL5LIB /usr/local/perl/perl5/lib/perl5
+#
+#	</IfModule>
+#
+# Copyright (c) 2024 by Landon Curt Noll.  All Rights Reserved.
 #
 # Permission to use, copy, modify, and distribute this software and
 # its documentation for any purpose and without fee is hereby granted,
@@ -34,126 +56,82 @@
 #
 # Share and enjoy! :-)
 
+
 # requirements
 #
-use CGI qw(:standard);
-use HTML::Entities;	# prevent cross site scripting
-sub xss($);		# prevent cross site scripting
 use strict;
-
-# For DOS (Denial Of Service) protection prevent file uploads and
-# really big "POSTS"
+use warnings;
+use utf8;
 #
-$CGI::POST_MAX = 32768;		# max post size
-$CGI::DISABLE_UPLOADS = 1;	# no uploads
-
-# my vars
+# dir where perl modules such as CGI/Tiny/Multipart.pm are found
+use lib "/usr/local/perl/perl5/lib/perl5";
 #
-my $q;		# our CGI object
-my $myself;	# this URL
-my $override=0;	# 1 ==> override current value to use defaults
+use CGI::Tiny;
+use Text::Xslate;
+use Data::Section::Simple 'get_data_section';
+use HTML::Entities 'encode_entities';
 
-# setup
+
+# CGI block
 #
-$q = new CGI;
-if (cgi_error()) {
-    print "Content-type: text/plain\n\n";
-    print "Your browser sent bad or too much data!\n";
-    print "Error: ", cgi_error(), "\n";
-    exit(1);
-}
+cgi {
+    my $cgi = $_;	# our CGI object
 
-# determine the override value
-#
-if ($q->param() && defined($q->param('override'))) {
-    # prevent cross site scripting
-    $override = xss($q->param('override'));
-}
+    # set up error handling on $cgi
+    #
+    $cgi->set_error_handler(sub {
+	my ($cgi, $error, $rendered) = @_;
+	warn $error;
 
-# start off HTML header output
-#
-print $q->header, "\n";
-print $q->start_html(-title => 'CGI Example #1',
-		     -bgcolor => '#98B8D8'), "\n";
-print $q->h1('CGI Example #1'), "\n";
+	unless ($rendered) {
+	    if ($cgi->response_status_code == 413) {
+		$cgi->render(json => {error => 'Request body limit exceeded'});
+	    } elsif ($cgi->response_status_code == 400) {
+		$cgi->render(json => {error => 'Bad request'});
+	    } else {
+		$cgi->render(json => {error => 'Internal server error'});
+	    }
+	}
+    });
 
-# print the HTML form
-#
-print $q->start_form(-method => 'POST'), "\n";
-print "What's your name? ", "\n";
-print $q->textfield(-name => 'yourname',
-		    -default => 'Your name here',
-		    -override => $override), "\n";
-print $q->p, "\n";
-print "What's the combination? ", "\n";
-print $q->checkbox_group(-name => 'words',
-			 -values => ['eenie','meenie','minie','moe'],
-			 -defaults => ['eenie','minie'],
-			 -override => $override), "\n";
-print $q->p, "\n";
-print "What's your favorite color? ", "\n";
-print $q->popup_menu(-name => 'color',
-		     -values => ['green','red','blue','chartreuse'],
-		     -override => $override), "\n";
-print $q->p, "\n";
-print "Use coconuts: ", "\n";
-print $q->checkbox(-name => 'coconut',
-		   -checked => '',
-		   -value => 'true',
-		   -label => ' <== Coconut checkbox',
-		   -override => $override), "\n";
-print $q->p, "\n";
-print $q->submit(-name => 'Submit'), "\n";
-print " ", "\n";
-print $q->reset(-name => 'Reset to last values'), "\n";
-print $q->end_form, "\n";
-print $q->start_form, "\n";
-print $q->hidden(-name => 'override',
-		 -default => '1',
-		 -override => 1), "\n";
-print $q->submit(-name => 'Restore defaults'), "\n";
-print $q->end_form, "\n";
-print $q->hr, "\n";
+    # Construct page from __DATA__
+    #
+    my $tx = xss(Text::Xslate->new(path => [get_data_section]));
 
-# post the reply
-#
-if ($q->param() && !defined($q->param('override'))) {
-    print $q->p, "\n";
-    print "Your name is: ", "\n";
-    # prevent cross site scripting
-    print $q->b(xss($q->param('yourname'))), "\n";
-    print $q->p, "\n";
-    print "The keywords are: ", "\n";
-    # prevent cross site scripting
-    print $q->em(xss(join(", ", $q->param('words')))), "\n";
-    print $q->p, "\n";
-    print "Your favorite color is: ", "\n";
-    # prevent cross site scripting
-    print $q->tt(xss(param('color'))), "\n";
-    print $q->p, "\n";
-    print "The coconut value (if any) is: ", "\n";
-    print $q->b('{'), "\n";
-    # prevent cross site scripting
-    print xss($q->param('coconut')), "\n";
-    print $q->b('}'), "\n";
-    print $q->p, "\n";
-    print $q->hr, "\n";
-}
+    # set response values
+    #
+    my $h1 = "CGI Example #1";
+    my $h2 = "Fizzbin ...";
+    my $script_name = $cgi->script_name;
+    my $yourname;
 
-# our standard trailer
-#
-# prevent cross site scripting
-($myself = xss($q->self_url)) =~ s/\?.*$//;
-$myself =~ s/.*\///;
-$myself =~ s/\.cgi/_cgi/;
-print "You can view the ";
-print $q->a({-href => "/chongo/tech/comp/cgi/".$myself.".txt"},
-	    'source code'), "\n";
-print " to this program.\n";
-print $q->hr, "\n";
-print $q->end_html, "\n";
+    # determine method - GET or HEAD or POST of 405 error
+    #
+    my $method = $cgi->method;
+    if ($method eq 'GET' or $method eq 'HEAD') {
+	$yourname = $cgi->query_param('yourname');
+    } elsif ($method eq 'POST') {
+	$yourname = $cgi->body_param('yourname');
+    } else {
+	$cgi->set_response_status(405)->render;
+	exit;
+    }
+    if (! defined $yourname) {
+	$yourname = "Your name here";
+    }
 
-# All done!!! - Jessica Noll, Age 2
+    # render response with $cgi->render or $cgi->render_chunk
+    #
+    $cgi->render(html => $tx->render('webpage.tx', {
+	h1 => xss($h1),
+	h2 => xss($h2),
+	script_name => xss($script_name),
+	yourname => xss($yourname),
+	}));
+};
+
+
+# All Done!!! -- Jessica Noll, Age 2
 #
 exit(0);
 
@@ -161,19 +139,19 @@ exit(0);
 # xss - remove or encode cross site scripting chars and non-printable chars
 #
 # given:
-#	$string		string to strip and encode or undef
+#       $string         string to strip and encode or undef
 #
 # returns:
-#	a safer string or an empty string if string was undef
+#       a safer string or an empty string if string was undef
 #
 sub xss($)
 {
-    my $string = $_[0];		# get arg
+    my $string = $_[0];         # get arg
 
     # firewall - undef returns undef
     #
     if (! defined $string) {
-	return "";
+        return "";
     }
 
     # paranoia - remove % & to avoid substitution recursion
@@ -182,9 +160,51 @@ sub xss($)
 
     # encode anything else unsafe
     #
-    $string = HTML::Entities::encode($string, "\000-\037\%\&\<\>\"\177-\377");
+    $string = encode_entities($string, "\000-\037\%\&\<\>\"\177-\377");
 
     # return the safe string
     #
     return $string;
 }
+
+
+__DATA__
+@@ webpage.tx
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Simple CGI Example #0</title>
+<meta name="description" content="Simple CGI Example #0">
+<meta name="keywords" content="CGI, example">
+</head>
+
+<body bgcolor="#98B8D8">
+
+<h1><: $h1 :></h1>
+<h2><: $h2 :></h2>
+
+<form method="post" action="<:$script_name:>" enctype="multipart/form-data">
+
+What's your name?
+
+<input type="text" name="yourname" value="<:$yourname:>">
+
+<p>
+
+<input type="submit" name="Submit" value="Submit">
+</form>
+
+<form method="post" action="<:$script_name:>" enctype="multipart/form-data">
+<input type="submit" name="Restore defaults" value="Restore defaults">
+</form>
+
+<hr>
+You can view the <a href="/chongo/tech/comp/cgi/cgi-example_cgi.txt">source code</a> to this program.
+<hr>
+
+</body>
+</html>

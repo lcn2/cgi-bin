@@ -96,7 +96,7 @@ cgi {
     #
     my $tx = xss(Text::Xslate->new(path => [get_data_section]));
 
-    # set response headers
+    # set response values
     #
     my $h1 = xss("Simple CGI example");
     my $h2 = xss("Fizzbin ...");
